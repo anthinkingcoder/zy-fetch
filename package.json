@@ -1,13 +1,14 @@
 {
-  "name": "ywl-fetch",
-  "version": "1.0.5",
-  "description": "a fetch polyfill",
+  "name": "zy-fetch",
+  "version": "1.0.0",
   "author": "anthinkingcoder <jojo837769723@gmail.com>",
   "private": false,
   "scripts": {
     "build": "webpack --config webpack.config.js"
   },
-  "dependencies": {},
+  "dependencies": {
+    "ywl-fetch": "^1.0.5"
+  },
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",

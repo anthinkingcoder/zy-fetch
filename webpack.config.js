@@ -6,13 +6,13 @@ const resolve = util.resolve
 module.exports = {
   mode: 'production',
   entry: {
-    main: './src/global-env.js'
+    main: './lib/interceptor.js'
   },
   output: {
     path: resolve('/dist'),
     publicPath: "/dist/",
-    filename: 'fetch-polyfill.js',
-    library: "fetch-polyfill",
+    filename: 'zy-fetch.js',
+    library: "zy-fetch",
     libraryTarget: "umd",
   },
   module: {
