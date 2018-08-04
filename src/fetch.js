@@ -16,16 +16,27 @@ coreHeaders = Headers
 // }
 
 
-const zyFetch = async function (url, option) {
-  const chain = [coreFetch]
+const zyFetch = function (url, option) {
+  const chain = []
   let request = new coreRequest(url, option)
   let promise = Promise.resolve(request)
+
+  //set request promise
   zyFetch.interceptors.request.forEach(interceptor => {
     chain.unshift(interceptor.resolve, interceptor.reject)
   })
+  // set fetch api promise
+  chain.push(handleFetch)
+
+  //set response promise
   zyFetch.interceptors.response.forEach(interceptor => {
     chain.push(interceptor.resolve, interceptor.reject)
   })
+
+  function handleFetch(request) {
+    return coreFetch(request)
+  }
+
 
   while (chain.length >= 2) {
     promise = promise.then(chain.shift(), chain.shift())
@@ -36,7 +47,6 @@ const zyFetch = async function (url, option) {
   // }).catch(() => {
   // console.info('chain处理失败')
   // })
-
   return promise
 
 }
