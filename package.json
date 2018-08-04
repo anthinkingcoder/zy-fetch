@@ -1,6 +1,6 @@
 {
   "name": "zy-fetch",
-  "version": "1.0.11",
+  "version": "1.0.10",
   "author": "anthinkingcoder <jojo837769723@gmail.com>",
   "private": false,
   "scripts": {
@@ -8,7 +8,7 @@
     "compile": "rm -rf /lib/* && babel src -d lib"
   },
   "dependencies": {
-    "ywl-fetch": "^1.0.10"
+    "ywl-fetch": "^1.0.11"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
