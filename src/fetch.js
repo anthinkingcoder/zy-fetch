@@ -18,7 +18,7 @@ coreHeaders = Headers
 
 const zyFetch = function (url, option) {
 
-  const chain = [coreFetch]
+  const chain = [coreFetch, undefined]
 
   let request = new coreRequest(url, option)
   let promise = Promise.resolve(request)
@@ -32,7 +32,6 @@ const zyFetch = function (url, option) {
   zyFetch.interceptors.response.forEach(interceptor => {
     chain.push(interceptor.resolve, interceptor.reject)
   })
-
 
 
   while (chain.length >= 2) {
