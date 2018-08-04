@@ -17,16 +17,16 @@ coreHeaders = Headers
 
 
 const zyFetch = function (url, option) {
-  // const chain = []
-  // const request = new coreRequest(url, option)
-  // let promise = Promise.resolve(request)
-  // zyFetch.interceptors.request.forEach(interceptor => {
-  //   chain.push(interceptor.resolve, interceptor.reject)
-  // })
-  //
-  // while (chain.length > 0) {
-  //   promise = promise.then(chain.shift(), chain.shift())
-  // }
+  const chain = []
+  const request = new coreRequest(url, option)
+  let promise = Promise.resolve(request)
+  zyFetch.interceptors.request.forEach(interceptor => {
+    chain.push(interceptor.resolve, interceptor.reject)
+  })
+
+  while (chain.length > 0) {
+    promise = promise.then(chain.shift(), chain.shift())
+  }
   // console.info(request)
   return coreFetch(request)
 }
