@@ -4,10 +4,11 @@
   "author": "anthinkingcoder <jojo837769723@gmail.com>",
   "private": false,
   "scripts": {
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack --config webpack.config.js",
+    "compile": "rm -rf /lib/* && babel src -d lib"
   },
   "dependencies": {
-    "ywl-fetch": "^1.0.5"
+    "ywl-fetch": "^1.0.6"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

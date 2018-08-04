@@ -4,15 +4,15 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const resolve = util.resolve
 module.exports = {
-  mode: 'production',
+  mode: 'none',
   entry: {
-    main: './lib/interceptor.js'
+    main: './src/index.js'
   },
   output: {
     path: resolve('/dist'),
     publicPath: "/dist/",
     filename: 'zy-fetch.js',
-    library: "zy-fetch",
+    library: "fetch",
     libraryTarget: "umd",
   },
   module: {
@@ -27,7 +27,7 @@ module.exports = {
             },
           }
         ],
-        exclude: /node_modules/,
+        exclude: /node_modules/
       }
     ],
   },
@@ -37,9 +37,9 @@ module.exports = {
     //     NODE_ENV: '"production"'
     //   }
     // }),
-    new UglifyJsPlugin({
-      parallel: true,
-      sourceMap: true,
-    })
+    // new UglifyJsPlugin({
+    //   parallel: true,
+    //   sourceMap: true,
+    // })
   ]
 };

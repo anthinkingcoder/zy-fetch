@@ -6,6 +6,7 @@ node_modules/
 typings/
 sandbox/
 test/
+src/
 bower.json
 CODE_OF_CONDUCT.md
 COLLABORATOR_GUIDE.md
