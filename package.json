@@ -8,7 +8,7 @@
     "compile": "rm -rf /lib/* && babel src -d lib"
   },
   "dependencies": {
-    "ywl-fetch": "^1.0.11"
+    "whatwg-fetch": "^2.0.4"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

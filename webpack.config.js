@@ -4,7 +4,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const resolve = util.resolve
 module.exports = {
-  mode: 'none',
+  mode: 'production',
   entry: {
     main: './src/index.js'
   },
@@ -12,7 +12,7 @@ module.exports = {
     path: resolve('/dist'),
     publicPath: "/dist/",
     filename: 'zy-fetch.js',
-    library: "fetch",
+    library: "ZYFETCH",
     libraryTarget: "umd",
   },
   module: {
@@ -37,9 +37,9 @@ module.exports = {
     //     NODE_ENV: '"production"'
     //   }
     // }),
-    // new UglifyJsPlugin({
-    //   parallel: true,
-    //   sourceMap: true,
-    // })
+    new UglifyJsPlugin({
+      parallel: true,
+      sourceMap: false,
+    })
   ]
 };
