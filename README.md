@@ -111,6 +111,28 @@ fetch.post('/file/upload', data)
   });
 ```
 
+
+#### Concurrent Requests
+```js
+  const userFetch = fetch()
+  const teacherFetch = fetch()
+  fetch.all(userFetch,teacherFetch)
+  .then((responses) => {
+    return fetch.all(responses[0].json(),responses[1].text())
+  }).then(datas => {
+    console.info(['user',datas[0]])
+     console.info(['teacher',datas[1]])
+  })
+  
+  // use fetch.spread to simplify
+   fetch.all(userFetch,teacherFetch)
+   .then(fetch.spread(function(userRes,teacherRes) {
+     return fetch.all(userRes.json(),teacherRes.text())
+   })).then(fetch.spread(function(user,teacher) {
+     //...
+   }))
+```
+
 ## Interceptors
 
 You can intercept requests or responses,add a request interceptor before request send or  add a response interceptor after response finished
@@ -134,10 +156,15 @@ axios.interceptors.request.use(
 // Add a common response interceptor, to handle not login
 fetch.interceptors.response.use(
   response => {
-    // do something
-    return response
+    return response().json().then(data => {
+      if (response.data.code === '0006') {
+            // handle not login
+            }
+            //remember return
+            return response
+    })
   },
   error => {
-    return Promise.reject('系统异常')
+    return Promise.reject('system error')
   })
 ```
