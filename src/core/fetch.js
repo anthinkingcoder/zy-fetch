@@ -1,19 +1,27 @@
 import 'whatwg-fetch' //fetch polyfill
 import Interceptor from './interceptor'
+import config from './config'
 
-const zyFetch = function (url, option) {
+const bodyMethods = ['POST', 'PUT', 'PATCH']
+const noBodyMethods = ['GET', 'DELETE', 'OPTIONS', 'HEAD']
+const fetch = self.fetch
 
+const zyFetch = function (init, option) {
+  // merge config
+  Object.assign(option.headers, zyFetch.config.headers.common, zyFetch.config.headers[option.method || 'get'])
+
+  //set fetch promise
   const chain = [fetch, undefined]
 
-  let request = new Request(url, option)
+  let request = new Request(init, option)
   let promise = Promise.resolve(request)
 
-  //set request promise
+  // set request promise
   zyFetch.interceptors.request.forEach(interceptor => {
     chain.unshift(interceptor.resolve, interceptor.reject)
   })
 
-  //set response promise
+  // set response promise
   zyFetch.interceptors.response.forEach(interceptor => {
     chain.push(interceptor.resolve, interceptor.reject)
   })
@@ -31,8 +39,48 @@ zyFetch.interceptors = {
   response: new Interceptor()
 }
 
-
 zyFetch.polyfill = fetch.polyfill
+
+bodyMethods.forEach(method => {
+  zyFetch[method] = function (init, body, option) {
+    Object.assign(option, {
+      method,
+      body
+    })
+    return zyFetch(init, option)
+  }
+})
+
+noBodyMethods.forEach(method => {
+  zyFetch[method] = function (init, option) {
+    Object.assign(option, {
+      method
+    })
+    return zyFetch(init, option)
+  }
+})
+
+/**
+ *
+ * @param fetchs some fetch
+ * @returns {Promise.<*[]>} return promise
+ */
+zyFetch.all = function (...fetchs) {
+  return Promise.all(fetchs)
+}
+
+/**
+ * 将函数的数组参数解构 [1,2,3] => 1,2,3
+ * @param cb
+ * @returns {Function}
+ */
+zyFetch.spread = function (cb) {
+  return function (args) {
+    cb.apply(null, args)
+  }
+}
+
+zyFetch.config = config
 
 export {
   zyFetch as fetch
