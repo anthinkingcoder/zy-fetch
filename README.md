@@ -57,8 +57,6 @@ fetch('/users.html', {
 ### MORE
 > This is a shorthand way
 #### GET
-> This is
-
 ```js
 // to mock a json data
 fetch.get('/mock/city.json')
