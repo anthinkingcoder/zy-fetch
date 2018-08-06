@@ -8,6 +8,7 @@ fetch api base http client for the brower,support Interceptors
 - Use [XMLHttpRequests](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) from the browser when not support fetch
 - Use [Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) from the browser when support fetch
 - Supports the [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) API
+- Supports automatic transformResponse
 - Support Interceptors
 
 ## Browser Support
@@ -69,7 +70,6 @@ fetch.get('/mock/city.json')
   .catch(function (error) {
     console.log(error);
   });
-
 
 ```
 #### POST
@@ -139,9 +139,53 @@ fetch.post('/file/upload', data)
     console.info([response1, response2])
   }))
 ```
+
+## transformResponse
+you can set responseType and transformResponse to auto transformResponse, like this,
+```js
+fetch.get('/mock/city.json', {
+  transformResponse:true, //default false
+  responseType: 'json' //default json
+})
+  .then(function (data) {
+    console.info(data)
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+```
+
+## config
+fetch(init,option),In addition to fetch's own option, you can add additional configuration.
+```js
+const config = {
+  headers: {},
+  responseType: 'json', //json,blob,formData,arrayBuffer,text
+  methods: 'get',
+  transformResponse: false, //default false,true represents automatic  transform response 
+  credentials: 'same-origin' //omit,include,same-origin
+}
+```
+
+## checkStatus
+A fetch() promise will reject with a TypeError when a network error is encountered or CORS is misconfigured on the server side, although this usually means permission issues or similar — a 404 does not constitute a network error, for example.  An accurate check for a successful fetch() would include checking that the promise resolved, then checking that the Response.ok property has a value of true,
+so we Built in  ```checkStatus``` function
+```js
+function checkStatus () {
+  if (response.status >= 200 && response.status < 300) {
+      return response
+    } else {
+      let error = new Error(response.statusText)
+      error.response = response
+      throw error
+    }
+}
+```
+
 ## Interceptors
 
-You can intercept requests or responses,add a request interceptor before request send or  add a response interceptor after response finished
+You can intercept requests or responses,add a request interceptor before request send or  add a response interceptor after response finished.
+response interceptor include transform interceptor and noTransform interceptor 
 ### example
 ```js
 // Add a x-csrf-token header
@@ -160,7 +204,7 @@ fetch.interceptors.request.use(
 )
 
 // Add a common response interceptor, to handle not login
-fetch.interceptors.response.use(
+fetch.interceptors.response.noTransform.use(
   response => {
     return response().json().then(data => {
       if (response.data.code === '0006') {
@@ -173,4 +217,18 @@ fetch.interceptors.response.use(
   error => {
     return Promise.reject('system error')
   })
+  
+ // or
+ fetch.interceptors.response.transform.use(
+   response => {
+       if (response.data.code === '0006') {
+             // handle not login
+             }
+             //remember return
+             return response
+   },
+   error => {
+     return Promise.reject('system error')
+   })
+ ```
 ```

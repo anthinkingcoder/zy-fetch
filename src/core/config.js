@@ -1,9 +1,8 @@
 const config = {
   headers: {},
   responseType: 'json',
-  withCredentials: false,
   methods: 'get',
-  transformResponse: true,
+  transformResponse: false,
   credentials: 'same-origin'
 }
 
