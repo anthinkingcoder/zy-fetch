@@ -4,10 +4,12 @@ const config = {
   }
 }
 
-const methdos = ['get', 'delete', 'head', 'options', 'post', 'patch', 'put']
-methdos.forEach(method => {
+const methods = ['get', 'delete', 'head', 'options', 'post', 'patch', 'put']
+methods.forEach(method => {
   config.headers[method] = {}
 })
+
+console.info(config)
 
 
 export default config

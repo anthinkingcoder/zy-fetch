@@ -7,8 +7,9 @@ const noBodyMethods = ['GET', 'DELETE', 'OPTIONS', 'HEAD']
 const fetch = self.fetch
 
 const zyFetch = function (init, option) {
+  option = option || {}
   // merge config
-  Object.assign(option.headers, zyFetch.config.headers.common, zyFetch.config.headers[option.method || 'get'])
+  Object.assign(option.headers || {}, zyFetch.config.headers.common, zyFetch.config.headers[option.method || 'get'])
 
   //set fetch promise
   const chain = [fetch, undefined]
@@ -65,8 +66,21 @@ noBodyMethods.forEach(method => {
  * @param fetchs some fetch
  * @returns {Promise.<*[]>} return promise
  */
-zyFetch.all = function (...fetchs) {
+zyFetch.all = function (fetchs) {
   return Promise.all(fetchs)
+}
+
+/**
+ * Execute fetch in sequence
+ * @param fetchs some fetch
+ */
+zyFetch.allByOrder = async function (fetchs) {
+  let responseArray = []
+  for (let i = 0; i < fetchs.length; i++) {
+    let response = await fetchs[i].call(this)
+    responseArray.push(response)
+  }
+  return Promise.resolve(responseArray)
 }
 
 /**

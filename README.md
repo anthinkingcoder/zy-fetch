@@ -131,6 +131,14 @@ fetch.post('/file/upload', data)
    }))
 ```
 
+#### Execute fetch in sequence
+```js
+ const fetch1 = fetch.bind(null, './mock/a.json')
+    const fetch2 = fetch.bind(null, './mock/a.json')
+  fetch.allByOrder([fetch1, fetch2]).then(fetch.spread((response1, response2) => {
+    console.info([response1, response2])
+  }))
+```
 ## Interceptors
 
 You can intercept requests or responses,add a request interceptor before request send or  add a response interceptor after response finished
