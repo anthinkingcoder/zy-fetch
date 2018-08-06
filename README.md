@@ -145,7 +145,7 @@ You can intercept requests or responses,add a request interceptor before request
 ### example
 ```js
 // Add a x-csrf-token header
-axios.interceptors.request.use(
+fetch.interceptors.request.use(
   request => {
     const csrfToken = cookies.get('csrfToken')
     if (!/^(GET|HEAD|OPTIONS|TRACE)$/.test(request.method)) {
