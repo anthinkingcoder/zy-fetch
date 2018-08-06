@@ -160,7 +160,6 @@ fetch(init,option),in addition to fetch's own option, option include other optio
 ```js
       responseType: 'json', //json,blob,formData,arrayBuffer,text
       transformResponse: false, //default false,true represents automatic  transform response 
-      credentials: 'same-origin' //omit,include,same-origin
 ```
 ## Global Config
 ### defaults
