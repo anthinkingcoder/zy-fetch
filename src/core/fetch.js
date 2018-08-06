@@ -1,6 +1,8 @@
 import 'whatwg-fetch' //fetch polyfill
 import Interceptor from './interceptor'
 import config from './config'
+import transformResponse from '../util/transformResponse'
+import checkStatus from '../util/checkStatus'
 
 const bodyMethods = ['POST', 'PUT', 'PATCH']
 const noBodyMethods = ['GET', 'DELETE', 'OPTIONS', 'HEAD']
@@ -8,13 +10,14 @@ const fetch = self.fetch
 
 const zyFetch = function (init, option) {
   option = option || {}
+  let config = {}
   // merge config
-  Object.assign(option.headers || {}, zyFetch.config.headers.common, zyFetch.config.headers[option.method || 'get'])
-
+  Object.assign(config, zyFetch.config, option)
   //set fetch promise
-  const chain = [fetch, undefined]
+  const chain = [fetch, undefined, checkStatus, undefined]
 
-  let request = new Request(init, option)
+
+  let request = new Request(init, config)
   let promise = Promise.resolve(request)
 
   // set request promise
@@ -22,10 +25,23 @@ const zyFetch = function (init, option) {
     chain.unshift(interceptor.onFulfilled, interceptor.onRejected)
   })
 
-  // set response promise
-  zyFetch.interceptors.response.forEach(interceptor => {
+  //set before transform response interceptors promise
+  zyFetch.interceptors.response.noTransform.forEach(interceptor => {
     chain.push(interceptor.onFulfilled, interceptor.onRejected)
   })
+
+  //set transform response promise
+  if (config.transformResponse) {
+    chain.push(transformResponse.bind(this, config.responseType))
+    chain.push(undefined)
+
+    // set after transform response promise
+    zyFetch.interceptors.response.transform.forEach(interceptor => {
+      chain.push(interceptor.onFulfilled, interceptor.onRejected)
+    })
+  }
+
+
 
   while (chain.length >= 2) {
     let onFulfilled = chain.shift()
@@ -38,7 +54,10 @@ const zyFetch = function (init, option) {
 
 zyFetch.interceptors = {
   request: new Interceptor(),
-  response: new Interceptor()
+  response: {
+    transform: new Interceptor(),
+    noTransform: new Interceptor()
+  }
 }
 
 zyFetch.polyfill = fetch.polyfill
