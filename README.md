@@ -186,6 +186,14 @@ function checkStatus () {
 
 You can intercept requests or responses,add a request interceptor before request send or  add a response interceptor after response finished.
 response interceptor include transform interceptor and noTransform interceptor 
+```zy-fetch``` inside is a mode of ```responsibility chain```
+
+1.if not automatic transform response
+>This order is ->request interceptors -> fetch -> checkstatus -> noTransform interceptor
+
+2.if automatic transform response
+>This order is ->request interceptors -> fetch -> checkstatus -> noTransform interceptor -> transformResponse -> transform interceptor
+
 ### example
 ```js
 // Add a x-csrf-token header
