@@ -155,16 +155,31 @@ fetch.get('/mock/city.json', {
   });
 ```
 
-## config
-fetch(init,option),In addition to fetch's own option, you can add additional configuration.
+## request config
+fetch(init,option),in addition to fetch's own option, option include other option,like this
 ```js
-const config = {
-  headers: {},
-  responseType: 'json', //json,blob,formData,arrayBuffer,text
-  methods: 'get',
-  transformResponse: false, //default false,true represents automatic  transform response 
-  credentials: 'same-origin' //omit,include,same-origin
-}
+      responseType: 'json', //json,blob,formData,arrayBuffer,text
+      transformResponse: false, //default false,true represents automatic  transform response 
+      credentials: 'same-origin' //omit,include,same-origin
+```
+## Global Config
+### defaults
+```js
+    const config = {
+      headers: {},
+      responseType: 'json', //json,blob,formData,arrayBuffer,text
+      methods: 'get',
+      transformResponse: false, //default false,true represents automatic  transform response 
+      credentials: 'same-origin' //omit,include,same-origin
+    }
+```
+### Set Config
+you also can set golbal config like this
+```js
+     fetch.config.headers['Content-Type'] = 'application/json'
+     fetch.config.responseType = 'blob'
+     fetch.config.transformResponse = true
+
 ```
 
 ## checkStatus
