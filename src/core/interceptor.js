@@ -3,10 +3,10 @@ class Interceptor {
     this.handlers = []
   }
 
-  use(resolve, reject) {
+  use(onFulfilled, onRejected) {
     this.handlers.push({
-      resolve,
-      reject
+      onFulfilled,
+      onRejected
     })
     return this.handlers.length - 1
   }

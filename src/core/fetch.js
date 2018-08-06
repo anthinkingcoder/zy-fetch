@@ -19,20 +19,21 @@ const zyFetch = function (init, option) {
 
   // set request promise
   zyFetch.interceptors.request.forEach(interceptor => {
-    chain.unshift(interceptor.resolve, interceptor.reject)
+    chain.unshift(interceptor.onFulfilled, interceptor.onRejected)
   })
 
   // set response promise
   zyFetch.interceptors.response.forEach(interceptor => {
-    chain.push(interceptor.resolve, interceptor.reject)
+    chain.push(interceptor.onFulfilled, interceptor.onRejected)
   })
 
-
   while (chain.length >= 2) {
-    promise = promise.then(chain.shift(), chain.shift())
+    let onFulfilled = chain.shift()
+    let onRejected = chain.shift()
+    promise = promise.then(onFulfilled, onRejected)
   }
-  return promise
 
+  return promise
 }
 
 zyFetch.interceptors = {
