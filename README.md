@@ -32,10 +32,10 @@ and
 import 'zy-fetch'
 ```
 
-Using script:
+Using cdn:
 
 ```html
-<script src="./dist/zy-fetch.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/zy-fetch@1.3.1/dist/zy-fetch.js"></script>
 ```
 
 
