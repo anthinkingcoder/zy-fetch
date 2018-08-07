@@ -13,9 +13,30 @@ const zyFetch = function (init, option) {
   let config = {}
   // merge config
   Object.assign(config, zyFetch.config, option)
-  //set fetch promise
-  const chain = [fetch, undefined, checkStatus, undefined]
 
+  //set checkStatus promise
+  let chain = [checkStatus, undefined];
+
+  //set timeout
+  if (config.timeout) {
+    let timeoutFetch = function (request) {
+      return new Promise((resolve, reject) => {
+        let timeout = setTimeout(() => {
+          reject(new Error('request timeout'))
+        }, config.timeout)
+        fetch(request).then((response) => {
+          clearTimeout(timeout)
+          resolve(response)
+        }).catch(err => {
+          clearTimeout(timeout)
+          reject(err)
+        })
+      })
+    }
+    chain.unshift(timeoutFetch, undefined)
+  } else {
+    chain.unshift(fetch, undefined)
+  }
 
   let request = new Request(init, config)
   let promise = Promise.resolve(request)
@@ -40,7 +61,6 @@ const zyFetch = function (init, option) {
       chain.push(interceptor.onFulfilled, interceptor.onRejected)
     })
   }
-
 
 
   while (chain.length >= 2) {
