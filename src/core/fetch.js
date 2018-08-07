@@ -1,8 +1,10 @@
-import 'whatwg-fetch' //fetch polyfill
+import '../fetch/fetch-polyfill'
 import Interceptor from './interceptor'
 import config from './config'
 import transformResponse from '../util/transformResponse'
 import checkStatus from '../util/checkStatus'
+import getTimeoutFetch from './timeout'
+import PromiseTask from './promiseTask'
 
 const bodyMethods = ['POST', 'PUT', 'PATCH']
 const noBodyMethods = ['GET', 'DELETE', 'OPTIONS', 'HEAD']
@@ -14,62 +16,41 @@ const zyFetch = function (init, option) {
   // merge config
   Object.assign(config, zyFetch.config, option)
 
-  //set checkStatus promise
-  let chain = [checkStatus, undefined];
-
-  //set timeout
-  if (config.timeout) {
-    let timeoutFetch = function (request) {
-      return new Promise((resolve, reject) => {
-        let timeout = setTimeout(() => {
-          reject(new Error('request timeout'))
-        }, config.timeout)
-        fetch(request).then((response) => {
-          clearTimeout(timeout)
-          resolve(response)
-        }).catch(err => {
-          clearTimeout(timeout)
-          reject(err)
-        })
-      })
-    }
-    chain.unshift(timeoutFetch, undefined)
-  } else {
-    chain.unshift(fetch, undefined)
-  }
-
   let request = new Request(init, config)
-  let promise = Promise.resolve(request)
+
+  let promiseTask = new PromiseTask()
 
   // set request promise
   zyFetch.interceptors.request.forEach(interceptor => {
-    chain.unshift(interceptor.onFulfilled, interceptor.onRejected)
+    promiseTask.add(interceptor.onFulfilled, interceptor.onRejected)
   })
+
+
+
+  //set timeout
+  if (config.timeout) {
+    promiseTask.add(getTimeoutFetch(config.timeout))
+  } else {
+    promiseTask.add(fetch)
+  }
+
+  //set checkStatus promise
+  promiseTask.add(checkStatus)
 
   //set before transform response interceptors promise
   zyFetch.interceptors.response.noTransform.forEach(interceptor => {
-    chain.push(interceptor.onFulfilled, interceptor.onRejected)
+    promiseTask.add(interceptor.onFulfilled, interceptor.onRejected)
   })
 
   //set transform response promise
   if (config.transformResponse) {
-    chain.push(transformResponse.bind(this, config.responseType))
-    chain.push(undefined)
-
+    promiseTask.add(transformResponse.bind(this, config.responseType))
     // set after transform response promise
     zyFetch.interceptors.response.transform.forEach(interceptor => {
-      chain.push(interceptor.onFulfilled, interceptor.onRejected)
+      promiseTask.add(interceptor.onFulfilled, interceptor.onRejected)
     })
   }
-
-
-  while (chain.length >= 2) {
-    let onFulfilled = chain.shift()
-    let onRejected = chain.shift()
-    promise = promise.then(onFulfilled, onRejected)
-  }
-
-  return promise
+  return promiseTask.execute(request)
 }
 
 zyFetch.interceptors = {
@@ -80,7 +61,6 @@ zyFetch.interceptors = {
   }
 }
 
-zyFetch.polyfill = fetch.polyfill
 
 bodyMethods.forEach(method => {
   zyFetch[method] = function (init, body, option) {
@@ -135,6 +115,7 @@ zyFetch.spread = function (cb) {
 }
 
 zyFetch.config = config
+zyFetch.polyfill = fetch.polyfill
 
 export {
   zyFetch as fetch

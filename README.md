@@ -5,10 +5,11 @@ fetch api base http client for the brower,support Interceptors
 
 ## Features
 
-- Use [XMLHttpRequests](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) from the browser when not support fetch
+- Use [XMLHttpRequests](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) from the browser when not support fetch,see [Fetch-polyfill](https://github.com/github/fetch)
 - Use [Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) from the browser when support fetch
 - Supports the [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) API
 - Supports automatic transformResponse
+- Support Timeout
 - Support Interceptors
 
 ## Browser Support
@@ -160,6 +161,7 @@ fetch(init,option),in addition to fetch's own option, option include other optio
 ```js
       responseType: 'json', //json,blob,formData,arrayBuffer,text
       transformResponse: false, //default false,true represents automatic  transform response 
+      timeout: undefined //to set request timeout time 
 ```
 ## Global Config
 ### defaults
@@ -181,6 +183,8 @@ you also can set golbal config like this
 
 ```
 
+
+
 ## checkStatus
 A fetch() promise will reject with a TypeError when a network error is encountered or CORS is misconfigured on the server side, although this usually means permission issues or similar — a 404 does not constitute a network error, for example.  An accurate check for a successful fetch() would include checking that the promise resolved, then checking that the Response.ok property has a value of true,
 so we Built in  ```checkStatus``` function
@@ -194,6 +198,19 @@ function checkStatus () {
       throw error
     }
 }
+```
+
+## Timeout
+```js
+ fetch('./mock/a.json', {
+     transformResponse: true,
+     timeout:1000,
+   }).then(function (res) {
+     console.info(res)
+   }).catch(function (err) {
+     console.info(err) //new Error('request timeout')
+   })
+
 ```
 
 ## Interceptors
