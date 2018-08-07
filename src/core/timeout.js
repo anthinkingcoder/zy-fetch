@@ -1,16 +1,16 @@
-export default function getTimeoutFetch(timeout) {
+export default function getTimeoutFetch(fetch,timeout) {
   let timeoutFetch
   if (fetch.polyfill) {
     timeoutFetch = function (request) {
       return fetch(request, {
-        timeout: timeout
+        timeout: timeout,
       })
     }
   } else {
     timeoutFetch = function (request) {
       return new Promise((resolve, reject) => {
         let timeout = setTimeout(() => {
-          reject(new Error('Network request timeout'))
+          reject(new TypeError('Network request timeout'))
         }, timeout)
         fetch(request).then((response) => {
           clearTimeout(timeout)

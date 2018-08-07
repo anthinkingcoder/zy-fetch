@@ -6,16 +6,14 @@ import checkStatus from '../util/checkStatus'
 import getTimeoutFetch from './timeout'
 import PromiseTask from './promiseTask'
 
-const bodyMethods = ['POST', 'PUT', 'PATCH']
-const noBodyMethods = ['GET', 'DELETE', 'OPTIONS', 'HEAD']
-const fetch = self.fetch
+const bodyMethods = ['post', 'put', 'patch']
+const noBodyMethods = ['get', 'delete', 'options', 'head']
 
 const zyFetch = function (init, option) {
   option = option || {}
   let config = {}
   // merge config
   Object.assign(config, zyFetch.config, option)
-
   let request = new Request(init, config)
 
   let promiseTask = new PromiseTask()
@@ -27,9 +25,9 @@ const zyFetch = function (init, option) {
     })
     //set timeout
     if (config.timeout) {
-      promiseTask.add(getTimeoutFetch(config.timeout))
+      promiseTask.add(getTimeoutFetch(zyFetch.fetch,config.timeout))
     } else {
-      promiseTask.add(fetch)
+      promiseTask.add(zyFetch.fetch)
     }
 
     //set checkStatus promise
@@ -65,6 +63,7 @@ zyFetch.interceptors = {
 
 bodyMethods.forEach(method => {
   zyFetch[method] = function (init, body, option) {
+    option = option || {}
     Object.assign(option, {
       method,
       body
@@ -75,6 +74,7 @@ bodyMethods.forEach(method => {
 
 noBodyMethods.forEach(method => {
   zyFetch[method] = function (init, option) {
+    option = option || {}
     Object.assign(option, {
       method
     })
@@ -117,7 +117,7 @@ zyFetch.spread = function (cb) {
 
 zyFetch.config = config
 zyFetch.polyfill = fetch.polyfill
-
+zyFetch.fetch = self.fetch
 export {
   zyFetch as fetch
 }

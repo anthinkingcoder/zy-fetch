@@ -454,7 +454,7 @@
       var xhr = new XMLHttpRequest()
 
       //add timeout support
-      if (init.timeout) {
+      if (init && init.timeout) {
         xhr.timeout = init.timeout
       }
 
