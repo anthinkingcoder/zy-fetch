@@ -20,36 +20,37 @@ const zyFetch = function (init, option) {
 
   let promiseTask = new PromiseTask()
 
-  // set request promise
-  zyFetch.interceptors.request.forEach(interceptor => {
-    promiseTask.add(interceptor.onFulfilled, interceptor.onRejected)
-  })
-
-
-
-  //set timeout
-  if (config.timeout) {
-    promiseTask.add(getTimeoutFetch(config.timeout))
-  } else {
-    promiseTask.add(fetch)
-  }
-
-  //set checkStatus promise
-  promiseTask.add(checkStatus)
-
-  //set before transform response interceptors promise
-  zyFetch.interceptors.response.noTransform.forEach(interceptor => {
-    promiseTask.add(interceptor.onFulfilled, interceptor.onRejected)
-  })
-
-  //set transform response promise
-  if (config.transformResponse) {
-    promiseTask.add(transformResponse.bind(this, config.responseType))
-    // set after transform response promise
-    zyFetch.interceptors.response.transform.forEach(interceptor => {
+  function _init() {
+    // set request promise
+    zyFetch.interceptors.request.forEach(interceptor => {
       promiseTask.add(interceptor.onFulfilled, interceptor.onRejected)
     })
+    //set timeout
+    if (config.timeout) {
+      promiseTask.add(getTimeoutFetch(config.timeout))
+    } else {
+      promiseTask.add(fetch)
+    }
+
+    //set checkStatus promise
+    promiseTask.add(checkStatus)
+
+    //set before transform response interceptors promise
+    zyFetch.interceptors.response.noTransform.forEach(interceptor => {
+      promiseTask.add(interceptor.onFulfilled, interceptor.onRejected)
+    })
+
+    //set transform response promise
+    if (config.transformResponse) {
+      promiseTask.add(transformResponse.bind(this, config.responseType))
+      // set after transform response promise
+      zyFetch.interceptors.response.transform.forEach(interceptor => {
+        promiseTask.add(interceptor.onFulfilled, interceptor.onRejected)
+      })
+    }
   }
+
+  _init()
   return promiseTask.execute(request)
 }
 
