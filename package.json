@@ -23,7 +23,10 @@
   },
   "keywords": [
     "fetch",
-    "xhr"
+    "xhr",
+    "http client",
+    "interceptor"
   ],
-  "main": "/lib/fetchs.js"
+  "main": "/lib/fetchs.js",
+  "license": "MIT"
 }
