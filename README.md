@@ -17,8 +17,8 @@ fetch api base http client for the brower,support Interceptors
 
 - Chrome
 - Firefox
-- Safari
-- Internet Explorer 10+
+- Safari 6.1+
+- Internet Explorer 9+
 
 
 ## Installing

@@ -463,8 +463,10 @@
       }
 
       xhr.onload = function () {
+        //ie9
+        var status = (xhr.status === 1223) ? 204 : xhr.status
         var options = {
-          status: xhr.status,
+          status: status,
           statusText: xhr.statusText,
           headers: parseHeaders(xhr.getAllResponseHeaders() || '')
         }

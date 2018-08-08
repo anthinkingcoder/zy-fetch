@@ -35,6 +35,7 @@ zyFetch.create = function (config = {}) {
 export {
   zyFetch as fetch
 }
+
 if (typeof window !== 'undefined' && typeof self !== 'undefined') {
   self.fetch = zyFetch
 }
