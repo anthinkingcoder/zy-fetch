@@ -1,4 +1,4 @@
-import {fetch} from '../../src/index'
+import {fetch} from '../../src/fetchs'
 
 const baseApi = 'mock/5b69ab3df770e33d7c13428e/zy-fetch'
 describe('testing normal http request', () => {
@@ -7,8 +7,6 @@ describe('testing normal http request', () => {
       return response.json()
     }).then(function (data) {
       expect(data.data.name).toBe('zhoulin')
-    }).catch(function (error) {
-      console.info(error)
     })
   });
 

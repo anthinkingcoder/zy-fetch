@@ -1,4 +1,4 @@
-import {fetch} from '../../src/index'
+import {fetch} from '../../src/fetchs'
 
 const baseApi = 'mock/5b69ab3df770e33d7c13428e/zy-fetch'
 
@@ -28,7 +28,6 @@ describe('test http request with interceptor', () => {
     }).then(function (response) {
       expect(response.data.name).toBe('zhoulin')
     }).catch(function (res) {
-      console.info(res)
     })
   })
 

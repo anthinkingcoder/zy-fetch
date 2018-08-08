@@ -6,7 +6,7 @@ const resolve = util.resolve
 module.exports = {
   mode: 'production',
   entry: {
-    main: './src/index.js'
+    main: './src/fetchs.js'
   },
   output: {
     path: resolve('/dist'),

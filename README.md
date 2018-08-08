@@ -11,6 +11,7 @@ fetch api base http client for the brower,support Interceptors
 - Supports automatic transformResponse
 - Support Timeout
 - Support Interceptors
+- Support Create Instance
 
 ## Browser Support
 
@@ -37,7 +38,6 @@ Using cdn:
 ```html
 <script src="https://cdn.jsdelivr.net/npm/zy-fetch@1.3.1/dist/zy-fetch.js"></script>
 ```
-
 
 ## Example
 
@@ -156,12 +156,34 @@ fetch.get('/mock/city.json', {
   });
 ```
 
+## api
+### Request method aliases
+##### fetch(init,option)
+##### fetch.send(init,option)
+##### fetch.get(init[, option])
+##### fetch.delete(init[, option])
+##### fetch.head(init[, option])
+##### fetch.options(init[, option])
+##### fetch.post(init[, body[, option]])
+##### fetch.put(init[, body[, option]])
+##### fetch.patch(init[, body[, option]])
+
+### Concurrency
+##### fetch.all(fetchArray)
+##### fetch.allByOrder(fetchArray)
+##### fetch.spread(callback)
+
+### Creating an instance
+You can create a new instance of zyFetch with a custom config.
+##### fetch.create([config])
+
+
 ## request config
 fetch(init,option),in addition to fetch's own option, option include other option,like this
 ```js
       responseType: 'json', //json,blob,formData,arrayBuffer,text
       transformResponse: false, //default false,true represents automatic  transform response 
-      timeout: undefined //to set request timeout time 
+      timeout: 1000 //to set request timeout time 
 ```
 ## Global Config
 ### defaults
@@ -171,7 +193,8 @@ fetch(init,option),in addition to fetch's own option, option include other optio
       responseType: 'json', //json,blob,formData,arrayBuffer,text
       methods: 'get',
       transformResponse: false, //default false,true represents automatic  transform response 
-      credentials: 'same-origin' //omit,include,same-origin
+      credentials: 'same-origin', //omit,include,same-origin
+      timeout: 0
     }
 ```
 ### Set Config
@@ -180,6 +203,7 @@ you also can set golbal config like this
      fetch.config.headers['Content-Type'] = 'application/json'
      fetch.config.responseType = 'blob'
      fetch.config.transformResponse = true
+     fetch.config.timeout = 3000
 
 ```
 
@@ -265,4 +289,19 @@ fetch.interceptors.response.noTransform.use(
      return Promise.reject('system error')
    })
  ```
+## Create Instance
+```js
+//fetch.create(config)
+const instance = fetch.create({
+  transformResponse:true
+})
+instance.get('/mock/city.json', {
+})
+  .then(function (data) {
+    console.info(data)
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
+
