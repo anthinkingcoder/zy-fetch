@@ -1,6 +1,6 @@
 {
   "name": "zy-fetch",
-  "version": "1.3.3",
+  "version": "1.4.0",
   "author": "anthinkingcoder <jojo837769723@gmail.com>",
   "private": false,
   "scripts": {
@@ -22,7 +22,8 @@
     "webpack-cli": "^3.1.0"
   },
   "keywords": [
-    "fetch","xhr"
+    "fetch",
+    "xhr"
   ],
   "main": "/lib/fetchs.js"
 }
