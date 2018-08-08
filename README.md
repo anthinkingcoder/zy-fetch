@@ -245,22 +245,17 @@ fetch.interceptors.request.use(
 // Add a common response interceptor, to handle not login
 fetch.interceptors.response.noTransform.use(
   response => {
-    return response().json().then(data => {
-      if (response.data.code === '0006') {
-            // handle not login
-            }
-            //remember return
-            return response
+    return response.json(function (data) {
+      return data
     })
   },
   error => {
     return Promise.reject('system error')
   })
   
- // or
  fetch.interceptors.response.transform.use(
-   response => {
-       if (response.data.code === '0006') {
+   data => {
+       if (data.data.code === '0006') {
              // handle not login
              }
              //remember return
