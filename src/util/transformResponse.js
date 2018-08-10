@@ -1,7 +1,13 @@
 export default function transformResponse(responseType, response) {
   switch (responseType) {
     case 'json': {
-      return response.json()
+      return response.json().then(res => {
+        if (typeof res === 'string') {
+          return JSON.parse(res)
+        } else {
+          return res
+        }
+      })
     }
     case 'blob': {
       return response.blob()

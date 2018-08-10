@@ -36,7 +36,7 @@ import 'zy-fetch'
 Using cdn:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/zy-fetch@1.4.4/dist/zy-fetch.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/zy-fetch@1.4.5/dist/zy-fetch.js"></script>
 ```
 
 ## Example
