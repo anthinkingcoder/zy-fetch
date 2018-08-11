@@ -9,6 +9,7 @@ fetch api base http client for the brower,support Interceptors
 - Use [Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) from the browser when support fetch
 - Supports the [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) API
 - Supports automatic transformResponse
+- Supports automatic build SearchParams
 - Support Timeout
 - Support Interceptors
 - Support Create Instance
