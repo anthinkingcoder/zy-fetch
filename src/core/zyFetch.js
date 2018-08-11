@@ -4,6 +4,8 @@ import transformResponse from '../util/transformResponse'
 import checkStatus from '../util/checkStatus'
 import getTimeoutFetch from './timeout'
 import PromiseTask from './promiseTask'
+import buildSearchParams from '../util/buildSearchParams'
+import {isFunction} from '../util/types'
 
 class zyFetch {
   constructor(config, fetch) {
@@ -22,7 +24,9 @@ class zyFetch {
     let config = {}
     // merge config
     Object.assign(config, this.config, option)
-    let request = new Request(init, config)
+
+    let request = this._getRequest(init, config)
+
     let promiseTask = new PromiseTask()
     this._initPromiseTask(promiseTask, config)
     return promiseTask.execute(request)
@@ -134,6 +138,32 @@ class zyFetch {
       body
     });
     return option
+  }
+
+  _getRequest(init, config) {
+    if (config.params) {
+      if (init instanceof Request) {
+        let url = buildSearchParams(init.url, config.params)
+        return this._mergeRequest(url, init, config)
+      } else {
+        let url = buildSearchParams(init, config.params)
+        return new Request(url, config)
+      }
+    }
+    return new Request(init, config)
+  }
+
+  _mergeRequest(url, request, config) {
+    let copyRequest = {}
+    //copy request props, but body can not get, so request.body will be ignore
+    for (let key in request) {
+      let val = request[key]
+      if (!isFunction(val)) {
+        copyRequest[key] = val
+      }
+    }
+    Object.assign(copyRequest, config)
+    return new Request(url, copyRequest)
   }
 }
 

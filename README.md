@@ -72,6 +72,34 @@ fetch.get('/mock/city.json')
     console.log(error);
   });
 
+// to get userinfo
+fetch.get('/mock/userinfo?userid=123')
+  .then(function (response) {
+    return response.json()
+  })
+  .then(function (data) {
+    console.info(data)
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+// or
+fetch.get('/mock/userinfo', {
+  params: {
+    userid:123
+  }
+})
+  .then(function (response) {
+    return response.json()
+  })
+  .then(function (data) {
+    console.info(data)
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
 ```
 #### POST
 
