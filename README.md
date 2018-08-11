@@ -37,7 +37,7 @@ import 'zy-fetch'
 Using cdn:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/zy-fetch@1.4.7/dist/zy-fetch.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/zy-fetch@1.5.0/dist/zy-fetch.js"></script>
 ```
 
 ## Example
@@ -212,7 +212,8 @@ fetch(init,option),in addition to fetch's own option, option include other optio
 ```js
       responseType: 'json', //json,blob,formData,arrayBuffer,text
       transformResponse: false, //default false,true represents automatic  transform response 
-      timeout: 1000 //to set request timeout time 
+      timeout: 1000, //to set request timeout time 
+      baseUrl: ''  //base url
 ```
 ## Global Config
 ### defaults
@@ -223,7 +224,8 @@ fetch(init,option),in addition to fetch's own option, option include other optio
       methods: 'get',
       transformResponse: false, //default false,true represents automatic  transform response 
       credentials: 'same-origin', //omit,include,same-origin
-      timeout: 0
+      timeout: 0,
+      baseUrl: '' // base url,
     }
 ```
 ### Set Config
@@ -233,6 +235,7 @@ you also can set golbal config like this
      fetch.config.responseType = 'blob'
      fetch.config.transformResponse = true
      fetch.config.timeout = 3000
+     fetch.config.baseUrl = 'https://www.zzz.com'
 
 ```
 

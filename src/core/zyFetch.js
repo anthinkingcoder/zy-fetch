@@ -6,6 +6,7 @@ import getTimeoutFetch from './timeout'
 import PromiseTask from './promiseTask'
 import buildSearchParams from '../util/buildSearchParams'
 import {isFunction} from '../util/types'
+import {isAbsoluteURL, buildAbsoluteURL} from "../util/baseUrl"
 
 class zyFetch {
   constructor(config, fetch) {
@@ -141,16 +142,17 @@ class zyFetch {
   }
 
   _getRequest(init, config) {
-    if (config.params) {
-      if (init instanceof Request) {
-        let url = buildSearchParams(init.url, config.params)
-        return this._mergeRequest(url, init, config)
-      } else {
-        let url = buildSearchParams(init, config.params)
-        return new Request(url, config)
-      }
+    let url = init.url ? init.url : init
+    if (config.baseUrl && !isAbsoluteURL(url)) {
+      url = buildAbsoluteURL(config.baseUrl, url)
     }
-    return new Request(init, config)
+    if (config.params) {
+      url = buildSearchParams(url, config.params)
+    }
+    if (init instanceof Request) {
+      return this._mergeRequest(url, init, config)
+    }
+    return new Request(url, config)
   }
 
   _mergeRequest(url, request, config) {
