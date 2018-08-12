@@ -1,11 +1,10 @@
 import ZyFetch from './core/zyFetch'
 import globalConfig from './core/config'
 import './fetch/fetch-polyfill'
-
 // native fetch
 const nativeFetch = self.fetch
 
-function createInstance(option) {
+export function createInstance(option) {
   let zy = new ZyFetch(option, nativeFetch)
   let instance = proxy(zy.send, zy)
 

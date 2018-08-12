@@ -4,17 +4,22 @@
   "author": "anthinkingcoder <jojo837769723@gmail.com>",
   "private": false,
   "scripts": {
-    "build": "webpack --config webpack.config.js",
-    "compile": "rm -rf /lib/* && babel src -d lib",
+    "build": "webpack --config build/webpack.prod.config.js",
+    "dev": "webpack --config build/webpack.dev.config.js",
+    "compile": "rm -rf lib/* && babel src -d lib",
     "test": "jest --config test/jest.config.js"
   },
-  "dependencies": {},
+  "dependencies": {
+  },
   "devDependencies": {
+    "webpack-merge": "^4.1.4",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
+    "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
+    "babel-preset-latest": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "jest": "^23.4.2",
     "webpack": "^4.16.5",

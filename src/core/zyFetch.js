@@ -1,4 +1,3 @@
-import '../fetch/fetch-polyfill'
 import Interceptor from './interceptor'
 import transformResponse from '../util/transformResponse'
 import checkStatus from '../util/checkStatus'
