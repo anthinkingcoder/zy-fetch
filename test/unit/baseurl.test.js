@@ -1,5 +1,4 @@
-// import {fetch} from '../../src/fetchs'
-import {fetch} from '../../bundle'
+import {fetch} from '../../src/fetchs'
 
 describe('testing create an instance', () => {
   test('create', () => {

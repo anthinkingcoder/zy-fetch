@@ -1,5 +1,4 @@
-// import {fetch} from '../../src/fetchs'
-import {fetch} from '../../bundle'
+import {fetch} from '../../lib/fetchs'
 const baseApi = 'mock/5b69ab3df770e33d7c13428e/zy-fetch'
 describe('testing normal http request', () => {
   test('user json', () => {
