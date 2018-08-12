@@ -13,6 +13,6 @@ module.exports = merge(base, {
     publicPath: "/dist/",
     filename: 'zy-fetch.js',
     library: "ZYFETCH",
-    libraryTarget: "common ",
+    libraryTarget: "umd",
   }
 })

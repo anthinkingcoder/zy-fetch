@@ -37,7 +37,7 @@ import 'zy-fetch'
 Using cdn:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/zy-fetch@1.5.1/dist/zy-fetch.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/zy-fetch@1.5.2np/dist/zy-fetch.min.js"></script>
 ```
 
 ## Example
@@ -221,7 +221,7 @@ fetch(init,option),in addition to fetch's own option, option include other optio
     const config = {
       headers: {},
       responseType: 'json', //json,blob,formData,arrayBuffer,text
-      methods: 'get',
+      method: 'get',
       transformResponse: false, //default false,true represents automatic  transform response 
       credentials: 'same-origin', //omit,include,same-origin
       timeout: 0,

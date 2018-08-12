@@ -24,7 +24,6 @@ class zyFetch {
     let config = {}
     // merge config
     Object.assign(config, this.config, option)
-
     let request = this._getRequest(init, config)
 
     let promiseTask = new PromiseTask()

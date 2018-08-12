@@ -1,7 +1,7 @@
 const config = {
   headers: {},
   responseType: 'json',
-  methods: 'get',
+  method: 'get',
   transformResponse: false,
   credentials: 'same-origin',
   timeout: 0,
