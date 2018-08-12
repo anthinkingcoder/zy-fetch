@@ -8,7 +8,7 @@ fetch api base http client for the brower,support Interceptors
 - Use [XMLHttpRequests](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) from the browser when not support fetch,see [Fetch-polyfill](https://github.com/github/fetch)
 - Use [Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) from the browser when support fetch
 - Supports the [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) API
-- Supports automatic transformResponse
+- Supports automatic transformResponse,transformRequest
 - Supports automatic build SearchParams
 - Support Timeout
 - Support Interceptors
@@ -37,7 +37,7 @@ import 'zy-fetch'
 Using cdn:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/zy-fetch@1.5.2np/dist/zy-fetch.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/zy-fetch@1.5.3/dist/zy-fetch.min.js"></script>
 ```
 
 ## Example
@@ -170,6 +170,34 @@ fetch.post('/file/upload', data)
   }))
 ```
 
+## transformRequest
+you can set transformRequest  to auto transformRequest, like this,
+```js
+
+fetch.post('/add/user', {
+  name: 'zhoulin'
+}, {
+  transformRequest:true
+})
+  .then(function (data) {
+    console.info(data)
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+//equal
+fetch.post('/add/user',JSON.stringify({
+   name: 'zhoulin'
+  }))
+  .then(function (data) {
+    console.info(data)
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+```
+
 ## transformResponse
 you can set responseType and transformResponse to auto transformResponse, like this,
 ```js
@@ -223,6 +251,7 @@ fetch(init,option),in addition to fetch's own option, option include other optio
       responseType: 'json', //json,blob,formData,arrayBuffer,text
       method: 'get',
       transformResponse: false, //default false,true represents automatic  transform response 
+      transformRequest: false, //default false,true represents automatic  transform request
       credentials: 'same-origin', //omit,include,same-origin
       timeout: 0,
       baseUrl: '' // base url,
@@ -234,6 +263,7 @@ you also can set golbal config like this
      fetch.config.headers['Content-Type'] = 'application/json'
      fetch.config.responseType = 'blob'
      fetch.config.transformResponse = true
+       fetch.config.transformRequest = true
      fetch.config.timeout = 3000
      fetch.config.baseUrl = 'https://www.zzz.com'
 

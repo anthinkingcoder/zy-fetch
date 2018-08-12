@@ -1,11 +1,13 @@
 import Interceptor from './interceptor'
 import transformResponse from '../util/transformResponse'
+import transformRequest from '../util/transformRequest'
 import checkStatus from '../util/checkStatus'
 import getTimeoutFetch from './timeout'
 import PromiseTask from './promiseTask'
 import buildSearchParams from '../util/buildSearchParams'
-import {isFunction} from '../util/types'
+import {isFunction} from '../util/typeCheck'
 import {isAbsoluteURL, buildAbsoluteURL} from "../util/baseUrl"
+import normalizeHeaderName from '../util/normalizeHeaderName'
 
 class zyFetch {
   constructor(config, fetch) {
@@ -140,6 +142,13 @@ class zyFetch {
   }
 
   _getRequest(init, config) {
+
+    normalizeHeaderName(config.headers, 'Content-Type')
+
+    //handle body
+    config.body = config.transformRequest && config.body ? transformRequest(config.body, config.headers) : config.body
+
+    //handle url
     let url = init.url ? init.url : init
     if (config.baseUrl && !isAbsoluteURL(url)) {
       url = buildAbsoluteURL(config.baseUrl, url)
