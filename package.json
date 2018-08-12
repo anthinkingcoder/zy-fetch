@@ -9,7 +9,9 @@
     "compile": "rm -rf lib/* && babel src -d lib",
     "test": "jest --config test/jest.config.js"
   },
-  "dependencies": {},
+  "dependencies": {
+    "babel-runtime": "^6.26.0"
+  },
   "devDependencies": {
     "webpack-merge": "^4.1.4",
     "babel-cli": "^6.26.0",
