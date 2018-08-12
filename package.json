@@ -1,6 +1,6 @@
 {
   "name": "zy-fetch",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "author": "anthinkingcoder <jojo837769723@gmail.com>",
   "private": false,
   "scripts": {
@@ -9,8 +9,7 @@
     "compile": "rm -rf lib/* && babel src -d lib",
     "test": "jest --config test/jest.config.js"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "webpack-merge": "^4.1.4",
     "babel-cli": "^6.26.0",
