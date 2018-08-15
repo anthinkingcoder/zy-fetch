@@ -1,9 +1,9 @@
 import {fetch} from '../../lib/fetchs'
-const baseApi = 'mock/5b69ab3df770e33d7c13428e/zy-fetch'
+fetch.config.baseUrl = 'https://www.easy-mock.com/mock/5b69ab3df770e33d7c13428e/zy-fetch'
 
 describe('testing timeout http request', () => {
   test('transform response', () => {
-    return fetch.get(`${baseApi}/city.json`, {
+    return fetch.get(`/city.json`, {
       transformResponse: true,
       responseType: 'json'
     }).then(function (data) {
@@ -12,7 +12,7 @@ describe('testing timeout http request', () => {
   })
 
   test('transform response', () => {
-    return fetch.get(`${baseApi}/city.json`, {
+    return fetch.get(`/city.json`, {
       transformResponse: true,
       responseType: 'text'
     }).then(function (data) {

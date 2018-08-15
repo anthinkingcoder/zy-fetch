@@ -10,7 +10,8 @@
     "test": "jest --config test/jest.config.js"
   },
   "dependencies": {
-    "babel-runtime": "^6.26.0"
+    "babel-runtime": "^6.26.0",
+    "node-fetch": "^2.2.0"
   },
   "devDependencies": {
     "webpack-merge": "^4.1.4",
@@ -30,7 +31,8 @@
     "fetch",
     "xhr",
     "http client",
-    "interceptor"
+    "interceptor",
+    "node"
   ],
   "repository": {
     "type": "git",

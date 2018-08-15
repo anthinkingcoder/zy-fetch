@@ -3,11 +3,12 @@ const baseApi = 'mock/5b69ab3df770e33d7c13428e/zy-fetch'
 
 describe('test http request with interceptor', () => {
   test('request interceptor', () => {
+    fetch.config.baseUrl = 'https://www.easy-mock.com/mock/5b69ab3df770e33d7c13428e/zy-fetch'
     fetch.interceptors.request.use((request) => {
       request.headers.append('csrf-token', '88888888')
       return request
     })
-    return fetch(`${baseApi}/csrfToken`, {
+    return fetch('/csrfToken', {
       method: 'post'
     }).then(function (response) {
       return response.json()
@@ -17,6 +18,7 @@ describe('test http request with interceptor', () => {
   })
 
   test('noTransform response interceptor', () => {
+    fetch.config.baseUrl = 'https://www.easy-mock.com/mock/5b69ab3df770e33d7c13428e/zy-fetch'
     fetch.interceptors.response.noTransform.use((response) => {
       return response.json().then(res => {
         return res
@@ -31,6 +33,7 @@ describe('test http request with interceptor', () => {
   })
 
   test('transform response interceptor', () => {
+    fetch.config.baseUrl = 'https://www.easy-mock.com/mock/5b69ab3df770e33d7c13428e/zy-fetch'
     fetch.interceptors.response.transform.use((data) => {
       if (data.code === '123456') {
         return data
@@ -40,7 +43,7 @@ describe('test http request with interceptor', () => {
     }, (error) => {
       return Promise.reject('error')
     })
-    return fetch(`${baseApi}/needLogin`, {
+    return fetch(`/needLogin`, {
       method: 'post',
       headers: {
         token: '12345'

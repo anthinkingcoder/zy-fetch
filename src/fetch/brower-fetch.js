@@ -1,6 +1,6 @@
 //fetch-polyfill url:https://github.com/github/fetch/blob/master/fetch.js
 ~(function (self) {
-  if (self.fetch) {
+  if (!self || self.fetch) {
     return
   }
   var support = {

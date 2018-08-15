@@ -1,5 +1,5 @@
 # zy-fetch
-fetch api base http client for the brower,support Interceptors
+fetch api base http client for the brower & node,support Interceptors
 
 
 
@@ -7,6 +7,7 @@ fetch api base http client for the brower,support Interceptors
 
 - Use [XMLHttpRequests](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) from the browser when not support fetch,see [Fetch-polyfill](https://github.com/github/fetch)
 - Use [Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) from the browser when support fetch
+- Use [node-fetch](https://github.com/bitinn/node-fetch) from the node.js
 - Supports the [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) API
 - Supports automatic transformResponse,transformRequest
 - Supports automatic build SearchParams
@@ -37,7 +38,7 @@ import 'zy-fetch'
 Using cdn:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/zy-fetch@1.5.4/dist/zy-fetch.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/zy-fetch@1.6.0/dist/zy-fetch.min.js"></script>
 ```
 
 ## Example

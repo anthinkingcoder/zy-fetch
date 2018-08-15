@@ -11,8 +11,8 @@ module.exports = merge(base, {
   output: {
     path: resolve('../dist'),
     publicPath: "/dist/",
-    filename: 'zy-fetch.js',
+    filename: 'zy-fetch.common.js',
     library: "ZYFETCH",
-    libraryTarget: "umd",
+    libraryTarget: "commonjs",
   }
 })
