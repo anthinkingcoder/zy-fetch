@@ -1,6 +1,6 @@
 {
   "name": "zy-fetch",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "author": "anthinkingcoder <jojo837769723@gmail.com>",
   "private": false,
   "scripts": {
@@ -10,7 +10,6 @@
     "test": "jest --config test/jest.config.js",
     "version": "npm run build && npm run dev && git add -A dist",
     "postversion": "git push && git push --tags"
-
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
@@ -44,6 +43,6 @@
   "browser": {
     "./src/fetch/nodeFetch.js": "./src/fetch/browerFetch.js"
   },
-  "main": "/lib/fetchs.js",
+  "main": "./lib/fetchs.js",
   "license": "MIT"
 }
