@@ -143,9 +143,9 @@ fetch.post('/file/upload', data)
 
 #### Concurrent Requests
 ```js
-  const userFetch = fetch()
-  const teacherFetch = fetch()
-  fetch.all(userFetch,teacherFetch)
+  const userFetch = fetch('api1')
+  const teacherFetch = fetch('api2')
+  fetch.all([userFetch,teacherFetch])
   .then((responses) => {
     return fetch.all(responses[0].json(),responses[1].text())
   }).then(datas => {
