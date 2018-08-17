@@ -1080,6 +1080,7 @@ var zyFetch = function () {
       if (config.timeout && config.timeout > 0) {
         promiseTask.add((0, _timeout2.default)(this.nativeFetch, config.timeout));
       } else {
+        console.info(this.nativeFetch);
         promiseTask.add(this.nativeFetch);
       }
 
@@ -4200,8 +4201,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = getNativeFetch;
 function getNativeFetch() {
   if (global) {
-    __webpack_require__(126);
-    return global.fetch;
+    var fetch = __webpack_require__(126);
+    return fetch;
   } else {
     __webpack_require__(126);
     return self.fetch;

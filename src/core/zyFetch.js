@@ -112,6 +112,7 @@ class zyFetch {
     if (config.timeout && config.timeout > 0) {
       promiseTask.add(getTimeoutFetch(this.nativeFetch, config.timeout))
     } else {
+      console.info(this.nativeFetch)
       promiseTask.add(this.nativeFetch)
     }
 

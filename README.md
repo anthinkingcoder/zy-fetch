@@ -38,7 +38,7 @@ import 'zy-fetch'
 Using cdn:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/zy-fetch@1.6.3/dist/zy-fetch.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/zy-fetch@1.6.4/dist/zy-fetch.min.js"></script>
 ```
 
 ## Example
@@ -62,18 +62,6 @@ fetch('/users.html', {
 > This is a shorthand way
 #### GET
 ```js
-// to mock a json data
-fetch.get('/mock/city.json')
-  .then(function (response) {
-    return response.json()
-  })
-  .then(function (data) {
-    console.info(data)
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-
 // to get userinfo
 fetch.get('/mock/userinfo?userid=123')
   .then(function (response) {
@@ -119,28 +107,6 @@ fetch.post('/user/add', JSON.stringify({'name':'zhoulin'}))
   });
 
 ```
-
-#### File Upload
-
-```js
-// to upload file
-var input = document.querySelector('input[type="file"]')
-var data = new FormData()
-data.append('file', input.files[0])
-
-fetch.post('/file/upload', data)
-  .then(function (response) {
-    return response.json()
-  })
-  .then(function (data) {
-    console.info(data)
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-```
-
-
 #### Concurrent Requests
 ```js
   const userFetch = fetch('api1')
@@ -366,5 +332,23 @@ instance.get('/mock/city.json', {
   .catch(function (error) {
     console.log(error);
   });
+```
+
+## Aborting Fetch
+  browsers & node that do not support fetch will also not support AbortController or AbortSignal , see (polyfill)[https://github.com/mo/abortcontroller-polyfill],
+```js
+  import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only'
+  import 'zy-fetch'
+  var controller = new AbortController();
+  var signal = controller.signal;
+  fetch('/city.json', {'signal':signal}).then(function (result) {
+    console.info(result)
+  }).catch(function (error) {
+    console.info(error)
+  })
+  setTimeout(function () {
+    controller.abort()
+  })
+
 ```
 
