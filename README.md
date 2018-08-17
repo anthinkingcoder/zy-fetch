@@ -335,7 +335,7 @@ instance.get('/mock/city.json', {
 ```
 
 ## Aborting Fetch
-  browsers & node that do not support fetch will also not support AbortController or AbortSignal , see (polyfill)[https://github.com/mo/abortcontroller-polyfill],
+  browsers & node that do not support fetch will also not support AbortController or AbortSignal , see [polyfill](https://github.com/mo/abortcontroller-polyfill),
 ```js
   import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only'
   import 'zy-fetch'
