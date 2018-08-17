@@ -38,7 +38,7 @@ import 'zy-fetch'
 Using cdn:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/zy-fetch@1.6.2/dist/zy-fetch.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/zy-fetch@1.6.3/dist/zy-fetch.min.js"></script>
 ```
 
 ## Example
@@ -164,8 +164,8 @@ fetch.post('/file/upload', data)
 
 #### Execute fetch in sequence
 ```js
- const fetch1 = fetch.bind(null, './mock/a.json')
-    const fetch2 = fetch.bind(null, './mock/a.json')
+ const fetch1 = fetch.bind(fetch, './mock/a.json')
+    const fetch2 = fetch.bind(fetch, './mock/a.json')
   fetch.allByOrder([fetch1, fetch2]).then(fetch.spread((response1, response2) => {
     console.info([response1, response2])
   }))

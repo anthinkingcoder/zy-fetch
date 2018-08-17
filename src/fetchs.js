@@ -1,7 +1,9 @@
 import ZyFetch from './core/zyFetch'
 import globalConfig from './core/config'
 import getNativeFetch from './fetch/nativeFetch'
+
 const nativeFetch = getNativeFetch()
+
 export function createInstance(option) {
   let zy = new ZyFetch(option, nativeFetch)
   let instance = proxy(zy.send, zy)
@@ -11,8 +13,11 @@ export function createInstance(option) {
       return fn.call(thisArgs, init, option)
     }
   }
+
   // extend method
-  Object.setPrototypeOf(instance, ZyFetch.prototype)
+  Object.getOwnPropertyNames(ZyFetch.prototype).forEach(name => {
+    instance[name] = zy[name]
+  })
   // extend own prop
   Object.getOwnPropertyNames(zy).forEach(name => {
     instance[name] = zy[name]
