@@ -1,9 +1,9 @@
 export default function getNativeFetch() {
-  if (global) {
-    const fetch = require('./nodeFetch')
-    return fetch
-  } else {
+  if (typeof window !== 'undefined' && self) {
     require('./browerFetch')
     return self.fetch
+  } else {
+    const fetch = require('./nodeFetch')
+    return fetch
   }
 }

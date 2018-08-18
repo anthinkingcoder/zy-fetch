@@ -1080,7 +1080,6 @@ var zyFetch = function () {
       if (config.timeout && config.timeout > 0) {
         promiseTask.add((0, _timeout2.default)(this.nativeFetch, config.timeout));
       } else {
-        console.info(this.nativeFetch);
         promiseTask.add(this.nativeFetch);
       }
 
@@ -4193,22 +4192,21 @@ exports.default = config;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global) {
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = getNativeFetch;
 function getNativeFetch() {
-  if (global) {
-    var fetch = __webpack_require__(126);
-    return fetch;
-  } else {
+  if (typeof window !== 'undefined' && self) {
     __webpack_require__(126);
     return self.fetch;
+  } else {
+    var fetch = __webpack_require__(126);
+    return fetch;
   }
 }
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(1)))
 
 /***/ }),
 /* 126 */
