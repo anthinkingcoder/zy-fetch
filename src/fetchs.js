@@ -4,7 +4,7 @@ import getNativeFetch from './fetch/nativeFetch'
 
 const nativeFetch = getNativeFetch()
 
-export function createInstance(option) {
+function createInstance(option) {
   let zy = new ZyFetch(option, nativeFetch)
   let instance = proxy(zy.send, zy)
 
@@ -33,9 +33,6 @@ zyFetch.create = function (config = {}) {
   return createInstance(option)
 }
 
-export {
-  zyFetch as fetch
-}
 
 if (typeof window !== 'undefined' && typeof self !== 'undefined') {
   self.fetch = zyFetch
@@ -44,4 +41,6 @@ if (typeof window !== 'undefined' && typeof self !== 'undefined') {
 if (global) {
   global.fetch = zyFetch
 }
+
+module.exports = zyFetch
 

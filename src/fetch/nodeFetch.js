@@ -7,13 +7,14 @@ const nodeFetch = require('node-fetch/lib/index.js')
  * @returns {Request|*}
  * @constructor
  */
-function AbortRequest (input, init) {
+function AbortRequest(input, init) {
   let request = new nodeFetch.Request(input, init)
-      if (init && init.signal) {
-      request.signal = init.signal
-    }
+  if (init && init.signal) {
+    request.signal = init.signal
+  }
   return request
 }
+
 AbortRequest.prototype = nodeFetch.Request.prototype
 
 /**
@@ -26,8 +27,8 @@ function abortFetch(init, option) {
     try {
       abortError = new DOMException('Aborted', 'AbortError');
     } catch (err) {
-      abortError = new Error('Aborted');
-      abortError.name = 'AbortError';
+      const DOMException = require('../util/domException')
+      abortError = new DOMException('Aborted', 'AbortError')
     }
 
     if (signal.aborted) {
