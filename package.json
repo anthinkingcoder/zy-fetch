@@ -39,7 +39,7 @@
     "url": "https://github.com/anthinkingcoder/zy-fetch.git"
   },
   "browser": {
-    "./src/fetch/nodeFetch.js": "./src/fetch/browerFetch.js"
+    "./lib/fetch/nodeFetch.js": "./lib/fetch/browerFetch.js"
   },
   "main": "./lib/fetchs.js",
   "license": "MIT"

@@ -5,7 +5,7 @@ const base = require('./webpack.base.config')
 module.exports = merge(base, {
   mode: 'none',
   entry: {
-    main: './src/fetchs.js'
+    main: './lib/fetchs.js'
   },
   output: {
     path: resolve('../dist'),
