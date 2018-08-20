@@ -33,14 +33,7 @@ zyFetch.create = function (config = {}) {
   return createInstance(option)
 }
 
-
-if (typeof window !== 'undefined' && typeof self !== 'undefined') {
-  self.fetch = zyFetch
-}
-
-if (global) {
-  global.fetch = zyFetch
-}
-
 module.exports = zyFetch
 
+//for TypeScript.
+exports.default = zyFetch
