@@ -1,4 +1,4 @@
-const nodeFetch = require('node-fetch/lib/index.js')
+const nodeFetch = require('node-fetch')
 
 /**
  * set signal in request

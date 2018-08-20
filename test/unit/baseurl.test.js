@@ -1,4 +1,4 @@
-import {fetch} from '../../src/fetchs'
+import fetch from '../../src/zyFetchs'
 
 describe('testing create an instance', () => {
   test('create', () => {

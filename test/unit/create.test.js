@@ -1,4 +1,4 @@
-import {fetch} from '../../lib/fetchs'
+import fetch from '../../lib/fetchs'
 
 
 describe('testing create an instance', () => {

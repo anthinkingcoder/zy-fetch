@@ -32,13 +32,18 @@ $ npm install zy-fetch -s
 ```
 and
 ```javascript
+//global use 
+// it will do that -> self.fetch = zyFetch or global.fetch = zyFetch
 import 'zy-fetch'
+
+//module use
+import zyFetch from 'zy-fetch/lib/zyFetchs'
 ```
 
 Using cdn:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/zy-fetch@1.6.5/dist/zy-fetch.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/zy-fetch@1.6.7/dist/zy-fetch.min.js"></script>
 ```
 
 ## Example
@@ -63,6 +68,7 @@ fetch('/users.html', {
 #### GET
 ```js
 // to get userinfo
+import 'zy-fetch'
 fetch.get('/mock/userinfo?userid=123')
   .then(function (response) {
     return response.json()
@@ -95,6 +101,7 @@ fetch.get('/mock/userinfo', {
 
 ```js
 // to add user
+import 'zy-fetch'
 fetch.post('/user/add', JSON.stringify({'name':'zhoulin'}))
   .then(function (response) {
     return response.json()
@@ -109,6 +116,7 @@ fetch.post('/user/add', JSON.stringify({'name':'zhoulin'}))
 ```
 #### Concurrent Requests
 ```js
+  import 'zy-fetch'
   const userFetch = fetch('api1')
   const teacherFetch = fetch('api2')
   fetch.all([userFetch,teacherFetch])
@@ -130,6 +138,7 @@ fetch.post('/user/add', JSON.stringify({'name':'zhoulin'}))
 
 #### Execute fetch in sequence
 ```js
+ import 'zy-fetch'
  const fetch1 = fetch.bind(fetch, './mock/a.json')
     const fetch2 = fetch.bind(fetch, './mock/a.json')
   fetch.allByOrder([fetch1, fetch2]).then(fetch.spread((response1, response2) => {
@@ -140,7 +149,7 @@ fetch.post('/user/add', JSON.stringify({'name':'zhoulin'}))
 ## transformRequest
 you can set transformRequest  to auto transformRequest, like this,
 ```js
-
+import 'zy-fetch'
 fetch.post('/add/user', {
   name: 'zhoulin'
 }, {
@@ -168,6 +177,7 @@ fetch.post('/add/user',JSON.stringify({
 ## transformResponse
 you can set responseType and transformResponse to auto transformResponse, like this,
 ```js
+import 'zy-fetch'
 fetch.get('/mock/city.json', {
   transformResponse:true, //default false
   responseType: 'json' //default json
