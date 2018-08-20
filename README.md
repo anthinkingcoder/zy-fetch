@@ -46,6 +46,31 @@ Using cdn:
 <script src="https://cdn.jsdelivr.net/npm/zy-fetch@1.6.7/dist/zy-fetch.min.js"></script>
 ```
 
+## api
+### Request method aliases
+##### fetch(init,option)
+##### fetch.send(init,option)
+##### fetch.get(init[, option])
+##### fetch.delete(init[, option])
+##### fetch.head(init[, option])
+##### fetch.options(init[, option])
+##### fetch.post(init[, body[, option]])
+##### fetch.put(init[, body[, option]])
+##### fetch.patch(init[, body[, option]])
+
+### Concurrency
+##### fetch.all(fetchArray)
+##### fetch.allByOrder(fetchArray)
+##### fetch.spread(callback)
+
+### Creating an instance
+You can create a new instance of zyFetch with a custom config.
+##### fetch.create([config])
+
+### nativeFetch
+##### fetch.nativeFetch (get window.fetch or node-fetch)
+
+
 ## Example
 
 ### NORMAL
@@ -64,7 +89,7 @@ fetch('/users.html', {
 ```
 
 ### MORE
-> This is a shorthand way
+> This is the writing of zy-fetch API
 #### GET
 ```js
 // to get userinfo
@@ -147,7 +172,7 @@ fetch.post('/user/add', JSON.stringify({'name':'zhoulin'}))
 ```
 
 ## transformRequest
-you can set transformRequest  to auto transformRequest, like this,
+you can set transformRequest  to auto transformRequest, like this
 ```js
 import 'zy-fetch'
 fetch.post('/add/user', {
@@ -175,7 +200,7 @@ fetch.post('/add/user',JSON.stringify({
 ```
 
 ## transformResponse
-you can set responseType and transformResponse to auto transformResponse, like this,
+you can set responseType and transformResponse to auto transformResponse, like this
 ```js
 import 'zy-fetch'
 fetch.get('/mock/city.json', {
@@ -188,79 +213,6 @@ fetch.get('/mock/city.json', {
   .catch(function (error) {
     console.log(error);
   });
-```
-
-## api
-### Request method aliases
-##### fetch(init,option)
-##### fetch.send(init,option)
-##### fetch.get(init[, option])
-##### fetch.delete(init[, option])
-##### fetch.head(init[, option])
-##### fetch.options(init[, option])
-##### fetch.post(init[, body[, option]])
-##### fetch.put(init[, body[, option]])
-##### fetch.patch(init[, body[, option]])
-
-### Concurrency
-##### fetch.all(fetchArray)
-##### fetch.allByOrder(fetchArray)
-##### fetch.spread(callback)
-
-### Creating an instance
-You can create a new instance of zyFetch with a custom config.
-##### fetch.create([config])
-
-
-## request config
-fetch(init,option),in addition to fetch's own option, option include other option,like this
-```js
-      responseType: 'json', //json,blob,formData,arrayBuffer,text
-      transformResponse: false, //default false,true represents automatic  transform response 
-      timeout: 1000, //to set request timeout time 
-      baseUrl: ''  //base url
-```
-## Global Config
-### defaults
-```js
-    const config = {
-      headers: {},
-      responseType: 'json', //json,blob,formData,arrayBuffer,text
-      method: 'get',
-      transformResponse: false, //default false,true represents automatic  transform response 
-      transformRequest: false, //default false,true represents automatic  transform request
-      credentials: 'same-origin', //omit,include,same-origin
-      timeout: 0,
-      baseUrl: '' // base url,
-    }
-```
-### Set Config
-you also can set golbal config like this
-```js
-     fetch.config.headers['Content-Type'] = 'application/json'
-     fetch.config.responseType = 'blob'
-     fetch.config.transformResponse = true
-       fetch.config.transformRequest = true
-     fetch.config.timeout = 3000
-     fetch.config.baseUrl = 'https://www.zzz.com'
-
-```
-
-
-
-## checkStatus
-A fetch() promise will reject with a TypeError when a network error is encountered or CORS is misconfigured on the server side, although this usually means permission issues or similar — a 404 does not constitute a network error, for example.  An accurate check for a successful fetch() would include checking that the promise resolved, then checking that the Response.ok property has a value of true,
-so we Built in  ```checkStatus``` function
-```js
-function checkStatus () {
-  if (response.status >= 200 && response.status < 300) {
-      return response
-    } else {
-      let error = new Error(response.statusText)
-      error.response = response
-      throw error
-    }
-}
 ```
 
 ## Timeout
@@ -342,6 +294,55 @@ instance.get('/mock/city.json', {
   .catch(function (error) {
     console.log(error);
   });
+```
+
+## request config
+fetch(init,option),in addition to fetch's own option, option include other option,like this
+```js
+      responseType: 'json', //json,blob,formData,arrayBuffer,text
+      transformResponse: false, //default false,true represents automatic  transform response 
+      timeout: 1000, //to set request timeout time 
+      baseUrl: ''  //base url
+```
+## Global Config
+### defaults
+```js
+    const config = {
+      headers: {},
+      responseType: 'json', //json,blob,formData,arrayBuffer,text
+      method: 'get',
+      transformResponse: false, //default false,true represents automatic  transform response 
+      transformRequest: false, //default false,true represents automatic  transform request
+      credentials: 'same-origin', //omit,include,same-origin
+      timeout: 0,
+      baseUrl: '' // base url,
+    }
+```
+### Set Config
+you also can set golbal config like this
+```js
+     fetch.config.headers['Content-Type'] = 'application/json'
+     fetch.config.responseType = 'blob'
+     fetch.config.transformResponse = true
+       fetch.config.transformRequest = true
+     fetch.config.timeout = 3000
+     fetch.config.baseUrl = 'https://www.zzz.com'
+
+```
+
+## checkStatus
+A fetch() promise will reject with a TypeError when a network error is encountered or CORS is misconfigured on the server side, although this usually means permission issues or similar — a 404 does not constitute a network error, for example.  An accurate check for a successful fetch() would include checking that the promise resolved, then checking that the Response.ok property has a value of true,
+so we Built in  ```checkStatus``` function
+```js
+function checkStatus () {
+  if (response.status >= 200 && response.status < 300) {
+      return response
+    } else {
+      let error = new Error(response.statusText)
+      error.response = response
+      throw error
+    }
+}
 ```
 
 ## Aborting Fetch
