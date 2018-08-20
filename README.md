@@ -70,6 +70,40 @@ You can create a new instance of zyFetch with a custom config.
 ### nativeFetch
 ##### fetch.nativeFetch (get window.fetch or node-fetch)
 
+## request config
+fetch(init,option),in addition to fetch's own option, zy-fetch include other option,like this
+```js
+      responseType: 'json', //json,blob,formData,arrayBuffer,text
+      transformResponse: false, //default false,true represents automatic  transform response 
+      timeout: 1000, //to set request timeout time 
+      baseUrl: ''  //base url
+```
+
+## Global Config
+### defaults
+```js
+    const config = {
+      headers: {},
+      responseType: 'json', //json,blob,formData,arrayBuffer,text
+      method: 'get',
+      transformResponse: false, //default false,true represents automatic  transform response 
+      transformRequest: false, //default false,true represents automatic  transform request
+      credentials: 'same-origin', //omit,include,same-origin
+      timeout: 0,
+      baseUrl: '' // base url,
+    }
+```
+### Set Config
+you also can set golbal config like this
+```js
+     fetch.config.headers['Content-Type'] = 'application/json'
+     fetch.config.responseType = 'blob'
+     fetch.config.transformResponse = true
+       fetch.config.transformRequest = true
+     fetch.config.timeout = 3000
+     fetch.config.baseUrl = 'https://www.zzz.com'
+
+```
 
 ## Example
 
@@ -294,40 +328,6 @@ instance.get('/mock/city.json', {
   .catch(function (error) {
     console.log(error);
   });
-```
-
-## request config
-fetch(init,option),in addition to fetch's own option, option include other option,like this
-```js
-      responseType: 'json', //json,blob,formData,arrayBuffer,text
-      transformResponse: false, //default false,true represents automatic  transform response 
-      timeout: 1000, //to set request timeout time 
-      baseUrl: ''  //base url
-```
-## Global Config
-### defaults
-```js
-    const config = {
-      headers: {},
-      responseType: 'json', //json,blob,formData,arrayBuffer,text
-      method: 'get',
-      transformResponse: false, //default false,true represents automatic  transform response 
-      transformRequest: false, //default false,true represents automatic  transform request
-      credentials: 'same-origin', //omit,include,same-origin
-      timeout: 0,
-      baseUrl: '' // base url,
-    }
-```
-### Set Config
-you also can set golbal config like this
-```js
-     fetch.config.headers['Content-Type'] = 'application/json'
-     fetch.config.responseType = 'blob'
-     fetch.config.transformResponse = true
-       fetch.config.transformRequest = true
-     fetch.config.timeout = 3000
-     fetch.config.baseUrl = 'https://www.zzz.com'
-
 ```
 
 ## checkStatus
