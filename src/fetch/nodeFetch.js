@@ -21,7 +21,8 @@ AbortRequest.prototype = nodeFetch.Request.prototype
  * in node env, to abort fetch request
  */
 function abortFetch(init, option) {
-  const signal = init && init instanceof nodeFetch.Request ? init.signal : (option ? option.signal : undefined)
+  const isRequest = init && init instanceof nodeFetch.Request
+  const signal = isRequest ? init.signal : (option ? option.signal : undefined)
   if (signal) {
     let abortError = void 0;
     try {

@@ -105,7 +105,9 @@ var _zyFetchs = __webpack_require__(2);
 
 var _zyFetchs2 = _interopRequireDefault(_zyFetchs);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
 
 if (typeof window !== 'undefined' && typeof self !== 'undefined') {
   self.fetch = _zyFetchs2.default;
@@ -169,7 +171,9 @@ var _nativeFetch = __webpack_require__(126);
 
 var _nativeFetch2 = _interopRequireDefault(_nativeFetch);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
 
 var nativeFetch = (0, _nativeFetch2.default)();
 
@@ -923,7 +927,9 @@ var _normalizeHeaderName = __webpack_require__(124);
 
 var _normalizeHeaderName2 = _interopRequireDefault(_normalizeHeaderName);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
 
 var zyFetch = function () {
   function zyFetch(config, fetch) {
@@ -1130,22 +1136,31 @@ var zyFetch = function () {
       //handle body
       config.body = config.transformRequest && config.body ? (0, _transformRequest2.default)(config.body, config.headers) : config.body;
 
+      var isRequest = init instanceof Request;
+
       //handle url
       var isNeedMerge = false;
-      var url = init.url ? init.url : init;
+      var url = isRequest ? init.url : init;
       if (config.baseUrl && !(0, _baseUrl.isAbsoluteURL)(url)) {
         url = (0, _baseUrl.buildAbsoluteURL)(config.baseUrl, url);
         isNeedMerge = true;
       }
+      // like //www.github.com -> https://www.github.com
+      else if (/^\/\//.test(url)) {
+          url = url.replace(/(?=^\/\/)/, 'https:');
+          isNeedMerge = true;
+        }
+
       if (config.params) {
         url = (0, _buildSearchParams2.default)(url, config.params);
         isNeedMerge = true;
       }
-      if (init instanceof Request) {
+
+      if (isRequest) {
         if (isNeedMerge) {
           return this._mergeRequest(url, init, config);
         } else {
-          return Request(init, config);
+          return new Request(init, config);
         }
       }
       return new Request(url, config);
@@ -3261,7 +3276,9 @@ var _createClass2 = __webpack_require__(92);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
 
 var Interceptor = function () {
   function Interceptor() {
@@ -3317,7 +3334,9 @@ var _promise2 = _interopRequireDefault(_promise);
 
 exports.default = transformResponse;
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
 
 function transformResponse(responseType, response) {
   switch (responseType) {
@@ -3373,7 +3392,9 @@ exports.default = transformRequest;
 
 var _typeCheck = __webpack_require__(101);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
 
 function transformRequest(body, headers) {
   if ((0, _typeCheck.isNormalObject)(body)) {
@@ -3416,7 +3437,9 @@ var _typeof2 = __webpack_require__(102);
 
 var _typeof3 = _interopRequireDefault(_typeof2);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
 
 var toString = Object.prototype.toString;
 
@@ -3948,7 +3971,9 @@ var _promise2 = _interopRequireDefault(_promise);
 
 exports.default = getTimeoutFetch;
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
 
 function getTimeoutFetch(fetch, timeout) {
   var timeoutFetch = void 0;
@@ -4000,7 +4025,9 @@ var _createClass2 = __webpack_require__(92);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
 
 var PromiseChain = function () {
   function PromiseChain() {
@@ -4059,7 +4086,9 @@ exports.default = buildSearchParams;
 
 var _typeCheck = __webpack_require__(101);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
 
 function encode(val) {
   return encodeURIComponent(val).replace(/%40/gi, '@').replace(/%3A/gi, ':').replace(/%24/g, '$').replace(/%2C/gi, ',').replace(/%20/g, '+').replace(/%5B/gi, '[').replace(/%5D/gi, ']');
@@ -4161,7 +4190,9 @@ var _keys2 = _interopRequireDefault(_keys);
 
 exports.default = normalizeHeaderName;
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
 
 function normalizeHeaderName(headers, normalizedName) {
   (0, _keys2.default)(headers).forEach(function (key) {
@@ -4239,7 +4270,9 @@ var _symbol = __webpack_require__(106);
 
 var _symbol2 = _interopRequireDefault(_symbol);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
 
 //fetch-polyfill url:https://github.com/github/fetch/blob/master/fetch.js
 ~function (self) {
@@ -4766,7 +4799,9 @@ var _inherits2 = __webpack_require__(133);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
 
 var DOMException = function (_Error) {
   (0, _inherits3.default)(DOMException, _Error);

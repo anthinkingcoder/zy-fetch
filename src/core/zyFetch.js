@@ -148,23 +148,31 @@ class zyFetch {
     //handle body
     config.body = config.transformRequest && config.body ? transformRequest(config.body, config.headers) : config.body
 
+    const isRequest = init instanceof Request
 
     //handle url
     let isNeedMerge = false
-    let url = init.url ? init.url : init
+    let url = isRequest ? init.url : init
     if (config.baseUrl && !isAbsoluteURL(url)) {
       url = buildAbsoluteURL(config.baseUrl, url)
       isNeedMerge = true
     }
+    // like //www.github.com -> https://www.github.com
+    if (/^\/\//.test(url)) {
+      url = url.replace(/(?=^\/\/)/, 'https:')
+      isNeedMerge = true
+    }
+
     if (config.params) {
       url = buildSearchParams(url, config.params)
       isNeedMerge = true
     }
-    if (init instanceof Request) {
+
+    if (isRequest) {
       if (isNeedMerge) {
         return this._mergeRequest(url, init, config)
       } else {
-        return Request(init, config)
+        return new Request(init, config)
       }
     }
     return new Request(url, config)
