@@ -8,6 +8,7 @@ import buildSearchParams from '../util/buildSearchParams'
 import {isFunction} from '../util/typeCheck'
 import {isAbsoluteURL, buildAbsoluteURL} from "../util/baseUrl"
 import normalizeHeaderName from '../util/normalizeHeaderName'
+import getRetryInterceptor from './retry'
 
 class zyFetch {
   constructor(config, fetch) {
@@ -29,7 +30,7 @@ class zyFetch {
     let request = this._getRequest(init, config)
 
     let promiseTask = new PromiseTask()
-    this._initPromiseTask(promiseTask, config)
+    this._initPromiseTask(promiseTask, config, request)
     return promiseTask.execute(request)
   }
 
@@ -102,21 +103,35 @@ class zyFetch {
     }
   }
 
-  _initPromiseTask(promiseTask, config) {
+  _initPromiseTask(promiseTask, config, request) {
     let interceptors = this.interceptors
     // set request promise
     interceptors.request.forEach(interceptor => {
       promiseTask.add(interceptor.onFulfilled, interceptor.onRejected)
     })
+    let fetch;
     //set timeout
     if (config.timeout && config.timeout > 0) {
-      promiseTask.add(getTimeoutFetch(this.nativeFetch, config.timeout))
+      fetch = getTimeoutFetch(this.nativeFetch, config.timeout)
+      promiseTask.add(fetch)
     } else {
-      promiseTask.add(this.nativeFetch)
+      fetch = this.nativeFetch
+      promiseTask.add(fetch)
     }
 
     //set checkStatus promise
     promiseTask.add(checkStatus)
+
+
+    //set retry
+    if (config.retry && config.retry > 1) {
+      for (let i = 0; i < config.retry; i++) {
+        promiseTask.add(...getRetryInterceptor(fetch, request, {
+          'retryCount': config.retry - (i + 1)
+        }))
+        promiseTask.add(checkStatus)
+      }
+    }
 
     //set before transform response interceptors promise
     interceptors.response.noTransform.forEach(interceptor => {

@@ -18,7 +18,7 @@ function createInstance(option) {
   Object.getOwnPropertyNames(ZyFetch.prototype).forEach(name => {
     instance[name] = zy[name]
   })
-  // extend own prop
+  // extend own  prop
   Object.getOwnPropertyNames(zy).forEach(name => {
     instance[name] = zy[name]
   })
