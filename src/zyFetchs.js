@@ -1,6 +1,7 @@
 import ZyFetch from './core/zyFetch'
 import globalConfig from './core/config'
 import getNativeFetch from './fetch/nativeFetch'
+import {deepCopy} from './util/extend'
 
 const nativeFetch = getNativeFetch()
 
@@ -28,8 +29,8 @@ function createInstance(option) {
 const zyFetch = createInstance(globalConfig)
 
 zyFetch.create = function (config = {}) {
-  let option = {}
-  Object.assign(option, globalConfig, config)
+  let option = deepCopy(globalConfig)
+  Object.assign(option, config)
   return createInstance(option)
 }
 

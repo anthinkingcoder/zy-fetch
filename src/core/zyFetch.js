@@ -9,7 +9,6 @@ import {isFunction} from '../util/typeCheck'
 import {isAbsoluteURL, buildAbsoluteURL} from "../util/baseUrl"
 import normalizeHeaderName from '../util/normalizeHeaderName'
 import getRetryInterceptor from './retry'
-
 class zyFetch {
   constructor(config, fetch) {
     this.config = config
