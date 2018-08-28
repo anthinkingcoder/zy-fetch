@@ -26,7 +26,7 @@ function createInstance(option) {
   return instance
 }
 
-const zyFetch = createInstance(globalConfig)
+const zyFetch = createInstance(deepCopy(globalConfig))
 
 zyFetch.create = function (config = {}) {
   let option = deepCopy(globalConfig)

@@ -192,7 +192,7 @@ function createInstance(option) {
   return instance;
 }
 
-var zyFetch = createInstance(_config.default);
+var zyFetch = createInstance((0, _extend.deepCopy)(_config.default));
 
 zyFetch.create = function () {
   var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
