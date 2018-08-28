@@ -9,6 +9,7 @@ import {isFunction} from '../util/typeCheck'
 import {isAbsoluteURL, buildAbsoluteURL} from "../util/baseUrl"
 import normalizeHeaderName from '../util/normalizeHeaderName'
 import getRetryInterceptor from './retry'
+
 class zyFetch {
   constructor(config, fetch) {
     this.config = config
@@ -124,12 +125,10 @@ class zyFetch {
 
     //set retry
     if (config.retry && config.retry > 1) {
-      for (let i = 0; i < config.retry; i++) {
-        promiseTask.add(...getRetryInterceptor(fetch, request, {
-          'retryCount': config.retry - (i + 1)
-        }))
-        promiseTask.add(checkStatus)
-      }
+      promiseTask.add(...getRetryInterceptor(fetch, request, {
+        'retryCount': config.retry,
+        'retryTimeout': config.retryTimeout
+      }))
     }
 
     //set before transform response interceptors promise

@@ -423,12 +423,10 @@ function () {
       promiseTask.add(_checkStatus.default); //set retry
 
       if (config.retry && config.retry > 1) {
-        for (var i = 0; i < config.retry; i++) {
-          promiseTask.add.apply(promiseTask, (0, _toConsumableArray2.default)((0, _retry.default)(fetch, request, {
-            'retryCount': config.retry - (i + 1)
-          })));
-          promiseTask.add(_checkStatus.default);
-        }
+        promiseTask.add.apply(promiseTask, (0, _toConsumableArray2.default)((0, _retry.default)(fetch, request, {
+          'retryCount': config.retry,
+          'retryTimeout': config.retryTimeout
+        })));
       } //set before transform response interceptors promise
 
 
@@ -1854,30 +1852,109 @@ function normalizeHeaderName(headers, normalizedName) {
 "use strict";
 
 
+var _interopRequireDefault = __webpack_require__(2);
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = getRetryInterceptor;
 
+var _regenerator = _interopRequireDefault(__webpack_require__(9));
+
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(12));
+
+var _checkStatus = _interopRequireDefault(__webpack_require__(20));
+
 function getRetryInterceptor(fetch, request, option) {
-  //重试次数
-  var retryCount = option.retryCount;
-  console.info(retryCount);
+  //retry count
+  var retryCount = option.retryCount; //timeout
+
+  var retryTimeout = option.retryTimeout;
+
+  var retry = function retry() {
+    return fetch(request).then(_checkStatus.default).catch(function (error) {
+      return onRejected(error);
+    });
+  };
+
+  var retryAdapter = function retryAdapter() {
+    if (retryTimeout && retryTimeout > 0) {
+      return (
+        /*#__PURE__*/
+        (0, _asyncToGenerator2.default)(
+        /*#__PURE__*/
+        _regenerator.default.mark(function _callee() {
+          return _regenerator.default.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  _context.next = 2;
+                  return timeout(retryTimeout);
+
+                case 2:
+                  return _context.abrupt("return", retry());
+
+                case 3:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee, this);
+        }))
+      );
+    } else {
+      return retry;
+    }
+  }; //get retry function
+
+
+  var retryFunction = retryAdapter();
 
   var onFulfilled = function onFulfilled(result) {
-    console.info();
     return result;
   };
 
-  var onRejected = function onRejected(error) {
-    if (retryCount >= 1) {
-      return fetch(request);
-    } else {
-      return Promise.reject(error);
-    }
-  };
+  var onRejected =
+  /*#__PURE__*/
+  function () {
+    var _ref2 = (0, _asyncToGenerator2.default)(
+    /*#__PURE__*/
+    _regenerator.default.mark(function _callee2(error) {
+      return _regenerator.default.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              if (!(retryCount >= 1)) {
+                _context2.next = 5;
+                break;
+              }
+
+              retryCount--;
+              return _context2.abrupt("return", retryFunction());
+
+            case 5:
+              return _context2.abrupt("return", Promise.reject(error));
+
+            case 6:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, this);
+    }));
+
+    return function onRejected(_x) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
 
   return [onFulfilled, onRejected];
+}
+
+function timeout(timeout) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, timeout);
+  });
 }
 
 /***/ }),

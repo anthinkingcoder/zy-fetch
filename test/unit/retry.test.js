@@ -11,4 +11,16 @@ describe('testing retry count', () => {
       expect(error).toEqual(new Error('Network request timeout'))
     })
   })
+
+  test('test retrytimeout', () => {
+    return fetch.get(`/retry`,{
+      retry:3,
+      retryTimeout:1000,
+      timeout:10,
+    }).then(function (response) {
+      return response.json()
+    }).catch(function (error) {
+      expect(error).toEqual(new Error('Network request timeout'))
+    })
+  })
 });
