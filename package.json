@@ -10,19 +10,18 @@
     "test": "jest --config test/jest.config.js"
   },
   "dependencies": {
-    "babel-runtime": "^6.26.0",
+    "@babel/runtime": "^7.0.0",
     "node-fetch": "^2.2.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.5",
-    "babel-plugin-external-helpers": "^6.22.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-latest": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "jest": "^23.4.2",
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.4.2",
+    "babel-loader": "^8.0.0",
+    "jest-cli": "^23.5.0",
     "webpack": "^4.16.5",
     "webpack-cli": "^3.1.0",
     "webpack-merge": "^4.1.4"
@@ -39,7 +38,7 @@
     "url": "https://github.com/anthinkingcoder/zy-fetch.git"
   },
   "browser": {
-    "./lib/fetch/nodeFetch.js": "./lib/fetch/browerFetch.js"
+    "./src/fetch/nodeFetch.js": "./src/fetch/browerFetch.js"
   },
   "main": "./lib/fetchs.js",
   "license": "MIT"

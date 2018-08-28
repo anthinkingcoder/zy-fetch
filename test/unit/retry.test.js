@@ -1,4 +1,4 @@
-import fetch from '../../lib/zyFetchs'
+import fetch from '../../src/zyFetchs'
 fetch.config.baseUrl = 'https://www.easy-mock.com/mock/5b69ab3df770e33d7c13428e/zy-fetch'
 describe('testing retry count', () => {
   test('test retry', () => {

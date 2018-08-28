@@ -1,6 +1,7 @@
+import {isArray} from './typeCheck'
 function deepCopy(obj) {
   let deepObj
-  if (Array.isArray(obj)) {
+  if (isArray(obj)) {
     deepObj = []
   } else if (typeof obj === 'object') {
     deepObj = {}

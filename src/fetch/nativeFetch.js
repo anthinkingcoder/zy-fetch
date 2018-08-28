@@ -1,5 +1,5 @@
-export default function getNativeFetch() {
-  if (typeof window !== 'undefined' && self) {
+export default async function getNativeFetch() {
+  if (typeof window !== 'undefined' && typeof self !== 'undefined') {
     require('./browerFetch')
     return self.fetch
   } else {
