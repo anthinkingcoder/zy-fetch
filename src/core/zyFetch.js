@@ -99,7 +99,7 @@ class zyFetch {
    */
   spread(cb) {
     return function (args) {
-      cb.apply(null, args)
+      return cb.apply(null, args)
     }
   }
 

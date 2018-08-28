@@ -398,7 +398,7 @@ function () {
     key: "spread",
     value: function spread(cb) {
       return function (args) {
-        cb.apply(null, args);
+        return cb.apply(null, args);
       };
     }
   }, {

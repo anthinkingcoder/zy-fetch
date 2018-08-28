@@ -12,6 +12,7 @@ fetch api base http client for the brower & node,support Interceptors
 - Supports automatic transformResponse,transformRequest
 - Supports automatic build SearchParams
 - Support Timeout
+- Support Retry Fetch
 - Support Interceptors
 - Support Create Instance
 
@@ -77,6 +78,8 @@ fetch(init,option),in addition to fetch's own option, zy-fetch include other opt
       transformResponse: false, //default false,true represents automatic  transform response 
       timeout: 1000, //to set request timeout time 
       baseUrl: ''  //base url
+      retry: Number //retry count
+      retryTimeout: 1000 //retry timeout
 ```
 
 ## Global Config
@@ -261,6 +264,20 @@ fetch.get('/mock/city.json', {
    })
 
 ```
+
+## Retry Fetch
+```js
+ fetch('./mock/a.json', {
+     transformResponse: true,
+     retry:3,
+     retryTimeout:1000,
+   }).then(function (res) {
+     console.info(res)
+   }).catch(function (err) {
+     console.info(err)
+   })
+```
+
 
 ## Interceptors
 
