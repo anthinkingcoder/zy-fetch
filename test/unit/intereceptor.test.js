@@ -1,4 +1,4 @@
-import fetch from '../../src/zyFetchs'
+import fetch from '../../lib/zyFetchs'
 const baseApi = 'mock/5b69ab3df770e33d7c13428e/zy-fetch'
 
 describe('test http request with interceptor', () => {

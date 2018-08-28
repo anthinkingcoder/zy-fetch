@@ -1,4 +1,4 @@
-import buildSearchParams from '../../src/util/buildSearchParams'
+import buildSearchParams from '../../lib/util/buildSearchParams'
 
 describe('testing build searchParams', () => {
   let params = {

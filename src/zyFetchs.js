@@ -36,7 +36,6 @@ zyFetch.create = function (config = {}) {
 
 module.exports = zyFetch
 
-export default zyFetch
 
 //for TypeScript.
 exports.default = zyFetch
