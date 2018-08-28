@@ -44,7 +44,7 @@ import zyFetch from 'zy-fetch/lib/zyFetchs'
 Using cdn:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/zy-fetch@1.6.9/dist/zy-fetch.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/zy-fetch@1.7.1/dist/zy-fetch.min.js"></script>
 ```
 
 ## api
