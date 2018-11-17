@@ -9,4 +9,4 @@ const config = {
   baseUrl: ''
 }
 
-export default config
+module.exports =  config

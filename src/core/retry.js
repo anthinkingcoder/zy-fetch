@@ -1,6 +1,6 @@
 import checkStatus from '../util/checkStatus'
 
-export default function getRetryInterceptor(fetch, request, option) {
+module.exports = function getRetryInterceptor(fetch, request, option) {
 
   //retry count
   let retryCount = option.retryCount;

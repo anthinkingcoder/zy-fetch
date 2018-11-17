@@ -20,5 +20,4 @@ class PromiseChain {
   }
 }
 
-
-export default PromiseChain
+module.exports =  PromiseChain

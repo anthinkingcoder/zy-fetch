@@ -205,4 +205,4 @@ class zyFetch {
   }
 }
 
-export default zyFetch
+module.exports =  zyFetch

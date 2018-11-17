@@ -26,4 +26,4 @@ class Interceptor {
 
 }
 
-export default Interceptor
+module.exports =  Interceptor
