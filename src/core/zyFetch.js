@@ -9,7 +9,6 @@ import {isFunction} from '../util/typeCheck'
 import {isAbsoluteURL, buildAbsoluteURL} from "../util/baseUrl"
 import normalizeHeaderName from '../util/normalizeHeaderName'
 import getRetryInterceptor from './retry'
-
 class zyFetch {
   constructor(config, fetch) {
     this.config = config
@@ -83,13 +82,23 @@ class zyFetch {
    * Execute fetch in sequence
    * @param fetchs some fetch
    */
-  async allByOrder(fetchs) {
+   allByOrder(fetchs) {
     let responseArray = []
-    for (let i = 0; i < fetchs.length; i++) {
-      let response = await fetchs[i].call(this)
-      responseArray.push(response)
+    let promise = null
+    for (let i = 0; i <= fetchs.length; i++) {
+      if (!promise) {
+        promise = Promise.resolve(() => {fetchs[i].call(this)})
+      }else {
+        promise = promise.then(data => {
+          responseArray.push(data)
+          if (i === fetchs.length) {
+            return responseArray
+          }
+          return fetchs[i].call(this)
+        })
+      }
     }
-    return Promise.resolve(responseArray)
+    return promise.then()
   }
 
   /**
