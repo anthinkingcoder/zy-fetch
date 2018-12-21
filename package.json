@@ -10,7 +10,6 @@
     "test": "jest --config test/jest.config.js"
   },
   "dependencies": {
-    "@babel/runtime": "^7.0.0",
     "node-fetch": "^2.2.0"
   },
   "devDependencies": {
