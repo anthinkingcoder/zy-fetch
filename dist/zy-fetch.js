@@ -99,75 +99,17 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global) {
-
-var _interopRequireDefault = __webpack_require__(2);
-
-var _zyFetchs = _interopRequireDefault(__webpack_require__(3));
-
-if (typeof window !== 'undefined' && typeof self !== 'undefined') {
-  self.fetch = _zyFetchs.default;
-}
-
-if (global) {
-  global.fetch = _zyFetchs.default;
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(1)))
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1, eval)("this");
-} catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
 
 
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
+var _interopRequireDefault = __webpack_require__(1);
 
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {
-    default: obj
-  };
-}
+var _zyFetch = _interopRequireDefault(__webpack_require__(2));
 
-module.exports = _interopRequireDefault;
+var _config = _interopRequireDefault(__webpack_require__(25));
 
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
+var _nativeFetch = _interopRequireDefault(__webpack_require__(26));
 
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(2);
-
-var _zyFetch = _interopRequireDefault(__webpack_require__(4));
-
-var _config = _interopRequireDefault(__webpack_require__(27));
-
-var _nativeFetch = _interopRequireDefault(__webpack_require__(28));
-
-var _extend = __webpack_require__(39);
+var _extend = __webpack_require__(37);
 
 var nativeFetch = (0, _nativeFetch.default)();
 
@@ -206,41 +148,53 @@ module.exports = zyFetch; //for TypeScript.
 exports.default = zyFetch;
 
 /***/ }),
-/* 4 */
+/* 1 */
+/***/ (function(module, exports) {
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    default: obj
+  };
+}
+
+module.exports = _interopRequireDefault;
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(2);
+var _interopRequireDefault = __webpack_require__(1);
 
-var _toConsumableArray2 = _interopRequireDefault(__webpack_require__(5));
+var _toConsumableArray2 = _interopRequireDefault(__webpack_require__(3));
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(9));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(7));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(10));
+var _createClass2 = _interopRequireDefault(__webpack_require__(8));
 
-var _interceptor = _interopRequireDefault(__webpack_require__(11));
+var _interceptor = _interopRequireDefault(__webpack_require__(9));
 
-var _transformResponse = _interopRequireDefault(__webpack_require__(12));
+var _transformResponse = _interopRequireDefault(__webpack_require__(10));
 
-var _transformRequest = _interopRequireDefault(__webpack_require__(13));
+var _transformRequest = _interopRequireDefault(__webpack_require__(11));
 
-var _checkStatus = _interopRequireDefault(__webpack_require__(16));
+var _checkStatus = _interopRequireDefault(__webpack_require__(14));
 
-var _timeout = _interopRequireDefault(__webpack_require__(17));
+var _timeout = _interopRequireDefault(__webpack_require__(15));
 
-var _promiseTask = _interopRequireDefault(__webpack_require__(18));
+var _promiseTask = _interopRequireDefault(__webpack_require__(16));
 
-var _buildSearchParams = _interopRequireDefault(__webpack_require__(19));
+var _buildSearchParams = _interopRequireDefault(__webpack_require__(17));
 
-var _typeCheck = __webpack_require__(14);
+var _typeCheck = __webpack_require__(12);
 
-var _baseUrl = __webpack_require__(20);
+var _baseUrl = __webpack_require__(18);
 
-var _normalizeHeaderName = _interopRequireDefault(__webpack_require__(21));
+var _normalizeHeaderName = _interopRequireDefault(__webpack_require__(19));
 
-var _retry = _interopRequireDefault(__webpack_require__(22));
+var _retry = _interopRequireDefault(__webpack_require__(20));
 
 var zyFetch =
 /*#__PURE__*/
@@ -490,14 +444,14 @@ function () {
 module.exports = zyFetch;
 
 /***/ }),
-/* 5 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayWithoutHoles = __webpack_require__(6);
+var arrayWithoutHoles = __webpack_require__(4);
 
-var iterableToArray = __webpack_require__(7);
+var iterableToArray = __webpack_require__(5);
 
-var nonIterableSpread = __webpack_require__(8);
+var nonIterableSpread = __webpack_require__(6);
 
 function _toConsumableArray(arr) {
   return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
@@ -506,7 +460,7 @@ function _toConsumableArray(arr) {
 module.exports = _toConsumableArray;
 
 /***/ }),
-/* 6 */
+/* 4 */
 /***/ (function(module, exports) {
 
 function _arrayWithoutHoles(arr) {
@@ -522,7 +476,7 @@ function _arrayWithoutHoles(arr) {
 module.exports = _arrayWithoutHoles;
 
 /***/ }),
-/* 7 */
+/* 5 */
 /***/ (function(module, exports) {
 
 function _iterableToArray(iter) {
@@ -532,7 +486,7 @@ function _iterableToArray(iter) {
 module.exports = _iterableToArray;
 
 /***/ }),
-/* 8 */
+/* 6 */
 /***/ (function(module, exports) {
 
 function _nonIterableSpread() {
@@ -542,7 +496,7 @@ function _nonIterableSpread() {
 module.exports = _nonIterableSpread;
 
 /***/ }),
-/* 9 */
+/* 7 */
 /***/ (function(module, exports) {
 
 function _classCallCheck(instance, Constructor) {
@@ -554,7 +508,7 @@ function _classCallCheck(instance, Constructor) {
 module.exports = _classCallCheck;
 
 /***/ }),
-/* 10 */
+/* 8 */
 /***/ (function(module, exports) {
 
 function _defineProperties(target, props) {
@@ -576,17 +530,17 @@ function _createClass(Constructor, protoProps, staticProps) {
 module.exports = _createClass;
 
 /***/ }),
-/* 11 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(2);
+var _interopRequireDefault = __webpack_require__(1);
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(9));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(7));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(10));
+var _createClass2 = _interopRequireDefault(__webpack_require__(8));
 
 var Interceptor =
 /*#__PURE__*/
@@ -628,7 +582,7 @@ function () {
 module.exports = Interceptor;
 
 /***/ }),
-/* 12 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -680,7 +634,7 @@ function transformResponse(responseType, response) {
 }
 
 /***/ }),
-/* 13 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -691,7 +645,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = transformRequest;
 
-var _typeCheck = __webpack_require__(14);
+var _typeCheck = __webpack_require__(12);
 
 function transformRequest(body, headers) {
   if ((0, _typeCheck.isNormalObject)(body)) {
@@ -703,13 +657,13 @@ function transformRequest(body, headers) {
 }
 
 /***/ }),
-/* 14 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(2);
+var _interopRequireDefault = __webpack_require__(1);
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -720,7 +674,7 @@ exports.isObject = isObject;
 exports.isFunction = isFunction;
 exports.isNormalObject = isNormalObject;
 
-var _typeof2 = _interopRequireDefault(__webpack_require__(15));
+var _typeof2 = _interopRequireDefault(__webpack_require__(13));
 
 var toString = Object.prototype.toString;
 /**
@@ -764,7 +718,7 @@ function isNormalObject(val) {
 }
 
 /***/ }),
-/* 15 */
+/* 13 */
 /***/ (function(module, exports) {
 
 function _typeof2(obj) {
@@ -798,7 +752,7 @@ function _typeof(obj) {
 module.exports = _typeof;
 
 /***/ }),
-/* 16 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -820,7 +774,7 @@ function checkStatus(response) {
 }
 
 /***/ }),
-/* 17 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -856,17 +810,17 @@ module.exports = function getTimeoutFetch(fetch, timeout) {
 };
 
 /***/ }),
-/* 18 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(2);
+var _interopRequireDefault = __webpack_require__(1);
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(9));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(7));
 
-var _createClass2 = _interopRequireDefault(__webpack_require__(10));
+var _createClass2 = _interopRequireDefault(__webpack_require__(8));
 
 var PromiseChain =
 /*#__PURE__*/
@@ -903,7 +857,7 @@ function () {
 module.exports = PromiseChain;
 
 /***/ }),
-/* 19 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -914,7 +868,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = buildSearchParams;
 
-var _typeCheck = __webpack_require__(14);
+var _typeCheck = __webpack_require__(12);
 
 function encode(val) {
   return encodeURIComponent(val).replace(/%40/gi, '@').replace(/%3A/gi, ':').replace(/%24/g, '$').replace(/%2C/gi, ',').replace(/%20/g, '+').replace(/%5B/gi, '[').replace(/%5D/gi, ']');
@@ -955,7 +909,7 @@ function buildSearchParams(url, params) {
 }
 
 /***/ }),
-/* 20 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -976,7 +930,7 @@ function buildAbsoluteURL(baseUrl, relativeUrl) {
 }
 
 /***/ }),
-/* 21 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -997,19 +951,19 @@ function normalizeHeaderName(headers, normalizedName) {
 }
 
 /***/ }),
-/* 22 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(2);
+var _interopRequireDefault = __webpack_require__(1);
 
-var _regenerator = _interopRequireDefault(__webpack_require__(23));
+var _regenerator = _interopRequireDefault(__webpack_require__(21));
 
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(26));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(24));
 
-var _checkStatus = _interopRequireDefault(__webpack_require__(16));
+var _checkStatus = _interopRequireDefault(__webpack_require__(14));
 
 module.exports = function getRetryInterceptor(fetch, request, option) {
   //retry count
@@ -1104,13 +1058,13 @@ function timeout(timeout) {
 }
 
 /***/ }),
-/* 23 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(24);
+module.exports = __webpack_require__(22);
 
 /***/ }),
-/* 24 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -1132,7 +1086,7 @@ var hadRuntime = g.regeneratorRuntime && Object.getOwnPropertyNames(g).indexOf("
 var oldRuntime = hadRuntime && g.regeneratorRuntime; // Force reevalutation of runtime.js.
 
 g.regeneratorRuntime = undefined;
-module.exports = __webpack_require__(25);
+module.exports = __webpack_require__(23);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -1147,7 +1101,7 @@ if (hadRuntime) {
 }
 
 /***/ }),
-/* 25 */
+/* 23 */
 /***/ (function(module, exports) {
 
 /**
@@ -1855,7 +1809,7 @@ function () {
 }() || Function("return this")());
 
 /***/ }),
-/* 26 */
+/* 24 */
 /***/ (function(module, exports) {
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
@@ -1897,7 +1851,7 @@ function _asyncToGenerator(fn) {
 module.exports = _asyncToGenerator;
 
 /***/ }),
-/* 27 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1916,7 +1870,7 @@ var config = {
 module.exports = config;
 
 /***/ }),
-/* 28 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1929,18 +1883,18 @@ exports.default = getNativeFetch;
 
 function getNativeFetch() {
   if (typeof window !== 'undefined' && typeof self !== 'undefined') {
-    __webpack_require__(29);
+    __webpack_require__(27);
 
     return self.fetch;
   } else {
-    var fetch = __webpack_require__(29);
+    var fetch = __webpack_require__(27);
 
     return fetch;
   }
 }
 
 /***/ }),
-/* 29 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2395,7 +2349,7 @@ function getNativeFetch() {
   try {
     new DOMException();
   } catch (err) {
-    DOMException = __webpack_require__(30);
+    DOMException = __webpack_require__(28);
   }
 
   function fetch(input, init) {
@@ -2480,23 +2434,23 @@ function getNativeFetch() {
 }(typeof self !== 'undefined' ? self : void 0);
 
 /***/ }),
-/* 30 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(2);
+var _interopRequireDefault = __webpack_require__(1);
 
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(9));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(7));
 
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(31));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(29));
 
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(33));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(31));
 
-var _inherits2 = _interopRequireDefault(__webpack_require__(34));
+var _inherits2 = _interopRequireDefault(__webpack_require__(32));
 
-var _wrapNativeSuper2 = _interopRequireDefault(__webpack_require__(36));
+var _wrapNativeSuper2 = _interopRequireDefault(__webpack_require__(34));
 
 var DOMException =
 /*#__PURE__*/
@@ -2518,12 +2472,12 @@ function (_Error) {
 module.exports = DOMException;
 
 /***/ }),
-/* 31 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _typeof = __webpack_require__(15);
+var _typeof = __webpack_require__(13);
 
-var assertThisInitialized = __webpack_require__(32);
+var assertThisInitialized = __webpack_require__(30);
 
 function _possibleConstructorReturn(self, call) {
   if (call && (_typeof(call) === "object" || typeof call === "function")) {
@@ -2536,7 +2490,7 @@ function _possibleConstructorReturn(self, call) {
 module.exports = _possibleConstructorReturn;
 
 /***/ }),
-/* 32 */
+/* 30 */
 /***/ (function(module, exports) {
 
 function _assertThisInitialized(self) {
@@ -2550,7 +2504,7 @@ function _assertThisInitialized(self) {
 module.exports = _assertThisInitialized;
 
 /***/ }),
-/* 33 */
+/* 31 */
 /***/ (function(module, exports) {
 
 function _getPrototypeOf(o) {
@@ -2563,10 +2517,10 @@ function _getPrototypeOf(o) {
 module.exports = _getPrototypeOf;
 
 /***/ }),
-/* 34 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var setPrototypeOf = __webpack_require__(35);
+var setPrototypeOf = __webpack_require__(33);
 
 function _inherits(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
@@ -2586,7 +2540,7 @@ function _inherits(subClass, superClass) {
 module.exports = _inherits;
 
 /***/ }),
-/* 35 */
+/* 33 */
 /***/ (function(module, exports) {
 
 function _setPrototypeOf(o, p) {
@@ -2601,16 +2555,16 @@ function _setPrototypeOf(o, p) {
 module.exports = _setPrototypeOf;
 
 /***/ }),
-/* 36 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getPrototypeOf = __webpack_require__(33);
+var getPrototypeOf = __webpack_require__(31);
 
-var setPrototypeOf = __webpack_require__(35);
+var setPrototypeOf = __webpack_require__(33);
 
-var isNativeFunction = __webpack_require__(37);
+var isNativeFunction = __webpack_require__(35);
 
-var construct = __webpack_require__(38);
+var construct = __webpack_require__(36);
 
 function _wrapNativeSuper(Class) {
   var _cache = typeof Map === "function" ? new Map() : undefined;
@@ -2649,7 +2603,7 @@ function _wrapNativeSuper(Class) {
 module.exports = _wrapNativeSuper;
 
 /***/ }),
-/* 37 */
+/* 35 */
 /***/ (function(module, exports) {
 
 function _isNativeFunction(fn) {
@@ -2659,10 +2613,10 @@ function _isNativeFunction(fn) {
 module.exports = _isNativeFunction;
 
 /***/ }),
-/* 38 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var setPrototypeOf = __webpack_require__(35);
+var setPrototypeOf = __webpack_require__(33);
 
 function isNativeReflectConstruct() {
   if (typeof Reflect === "undefined" || !Reflect.construct) return false;
@@ -2697,22 +2651,22 @@ function _construct(Parent, args, Class) {
 module.exports = _construct;
 
 /***/ }),
-/* 39 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(2);
+var _interopRequireDefault = __webpack_require__(1);
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.deepCopy = deepCopy;
 
-var _typeof2 = _interopRequireDefault(__webpack_require__(15));
+var _typeof2 = _interopRequireDefault(__webpack_require__(13));
 
-var _typeCheck = __webpack_require__(14);
+var _typeCheck = __webpack_require__(12);
 
 function deepCopy(obj) {
   var deepObj;
