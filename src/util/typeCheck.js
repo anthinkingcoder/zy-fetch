@@ -32,7 +32,12 @@ function isFunction(val) {
  * 对象是否为普通对象类型
  */
 function isNormalObject(val) {
-  return toString.call(val) === '[object Object]'
+  if (!toString.call(val) === '[object Object]') {
+    return false;
+  }
+
+  let proto = Object.getPrototypeOf(val);
+  return proto === null || proto === Object.getPrototypeOf({});
 }
 
 export {
